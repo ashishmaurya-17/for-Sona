@@ -1,149 +1,95 @@
 // --- CONFIGURATION ---
-const config = {
-    name: "Sona",
-    birthdayDate: "2026-01-12", // Update Year if needed
-    instaLink: "https://www.instagram.com/noor_editx1/",
-    // Flirty Lines instead of Technical ones
-    flirtyLines: [
-        "Scanning for the prettiest girl...",
-        "Error: Smile is too bright! 😎",
-        "Warning: High levels of Cutenss detected...",
-        "System overheating due to Sona's charm...",
-        "Are you a magician? Because everyone else disappeared."
-    ]
-};
+const bdayDate = "2026-01-12"; // Set correct year
 
-// --- FLIRTY TYPING EFFECT ---
-let lineIndex = 0;
-let charIndex = 0;
-const typingArea = document.getElementById("typing-text");
-
-function typeFlirtyLines() {
-    if (lineIndex < config.flirtyLines.length) {
-        if (charIndex < config.flirtyLines[lineIndex].length) {
-            typingArea.innerHTML += config.flirtyLines[lineIndex].charAt(charIndex);
-            charIndex++;
-            setTimeout(typeFlirtyLines, 50);
-        } else {
-            setTimeout(() => {
-                typingArea.innerHTML = ""; // Clear for next line
-                charIndex = 0;
-                lineIndex++;
-                typeFlirtyLines();
-            }, 1500); // Wait before next line
-        }
-    } else {
-        // Loop messages
-        lineIndex = 0;
-        typeFlirtyLines();
-    }
-}
-
-// --- MOBILE SPOOF BUTTON LOGIC ---
-const btn = document.getElementById("spoof-btn");
-let touchCount = 0;
-
-// Function to move button
-function moveButton(e) {
-    if (touchCount < 6) { // Run away 6 times
-        e.preventDefault(); // Stop click from happening
-        
-        const maxWidth = window.innerWidth - 150;
-        const maxHeight = window.innerHeight - 100;
-        
-        const randomX = Math.floor(Math.random() * maxWidth);
-        const randomY = Math.floor(Math.random() * maxHeight);
-        
-        btn.style.position = "absolute";
-        btn.style.left = Math.max(10, randomX) + "px"; // Ensure it stays on screen
-        btn.style.top = Math.max(10, randomY) + "px";
-        
-        const funnyTexts = ["NOPE! 😜", "TOO SLOW!", "TRY HARDER!", "CATCH ME!", "ALMOST...", "MISS ME?"];
-        btn.innerText = funnyTexts[touchCount % funnyTexts.length];
-        
-        touchCount++;
-    } else {
-        // Let her click now
-        btn.style.position = "static";
-        btn.style.marginTop = "30px";
-        btn.innerText = "OKAY, CLICK ME! 🎁";
-        btn.style.background = "#ff0055";
-        btn.style.color = "white";
-        // Remove the run-away listener
-        btn.removeEventListener('touchstart', moveButton);
-        btn.removeEventListener('mouseover', moveButton);
-        
-        // Add click listener for reveal
-        btn.onclick = revealSurprise;
-    }
-}
-
-// Add Listeners for both Touch (Mobile) and Mouse (Laptop)
-btn.addEventListener('touchstart', moveButton); 
-btn.addEventListener('mouseover', moveButton);
-
-// --- REVEAL SURPRISE ---
-function revealSurprise() {
-    document.getElementById("prank-screen").style.display = "none";
-    document.getElementById("celebration-screen").style.display = "block";
-    document.body.style.overflow = "auto";
+// --- NAVIGATION LOGIC ---
+function goToOptions() {
+    // Current screen upar chala jayega
+    document.getElementById('screen-1').classList.remove('active-screen');
+    document.getElementById('screen-1').classList.add('past-screen');
     
-    // Play Music
-    const music = document.getElementById("bg-music");
-    music.play().catch(e => console.log("User interaction needed for audio"));
+    // Next screen niche se aayega
+    document.getElementById('screen-2').classList.remove('next-screen');
+    document.getElementById('screen-2').classList.add('active-screen');
 
-    // Set Data
-    document.getElementById("wish-msg").innerText = 
-        `Hey ${config.name}, just wanted to remind you that you are amazing! Keep shining and making those awesome edits.`;
-    document.getElementById("insta-link").href = config.instaLink;
+    // Play Music on first interaction
+    const audio = document.getElementById("bg-music");
+    audio.play().catch(e => console.log("Audio waiting..."));
+}
 
-    // Start Confetti
+function goToFinal() {
+    // Screen 2 upar jayega
+    document.getElementById('screen-2').classList.remove('active-screen');
+    document.getElementById('screen-2').classList.add('past-screen');
+
+    // Screen 3 reveal hoga
+    document.getElementById('screen-3').classList.remove('next-screen');
+    document.getElementById('screen-3').classList.add('active-screen');
+
+    // Confetti Blast
     launchConfetti();
 }
 
-// --- COUNTDOWN TIMER ---
-function startCountdown() {
-    const countDate = new Date(config.birthdayDate).getTime();
+// --- BUTTON SPOOF LOGIC (Screen 1) ---
+let touchCount = 0;
+const spoofBtn = document.getElementById("spoof-btn");
 
-    setInterval(() => {
-        const now = new Date().getTime();
-        const gap = countDate - now;
-
-        const second = 1000;
-        const minute = second * 60;
-        const hour = minute * 60;
-        const day = hour * 24;
-
-        const d = Math.floor(gap / day);
-        const h = Math.floor((gap % day) / hour);
-        const m = Math.floor((gap % hour) / minute);
-        const s = Math.floor((gap % minute) / second);
-
-        if (gap > 0) {
-            document.getElementById("countdown").innerText = 
-                `${d}d : ${h}h : ${m}m : ${s}s`;
-        } else {
-            document.getElementById("countdown").innerText = "IT'S PARTY TIME! 🎂";
-        }
-    }, 1000);
+function runAway(e) {
+    if (touchCount < 5) {
+        e.preventDefault();
+        const maxX = window.innerWidth - 150;
+        const maxY = window.innerHeight - 100;
+        
+        spoofBtn.style.position = "absolute";
+        spoofBtn.style.left = Math.random() * maxX + "px";
+        spoofBtn.style.top = Math.random() * maxY + "px";
+        
+        const texts = ["NOPE! 😜", "TOO SLOW!", "TRY HARDER!", "ALMOST..."];
+        spoofBtn.innerText = texts[touchCount % texts.length];
+        
+        touchCount++;
+    } else {
+        // Stop & Allow Click
+        spoofBtn.style.position = "static";
+        spoofBtn.style.marginTop = "30px";
+        spoofBtn.innerText = "OKAY, PROCEED ->";
+        spoofBtn.style.background = "#0f0";
+        spoofBtn.style.color = "black";
+        
+        // Remove old listeners
+        spoofBtn.removeEventListener('touchstart', runAway);
+        spoofBtn.removeEventListener('mouseover', runAway);
+        
+        // Add Slide Action
+        spoofBtn.onclick = goToOptions;
+    }
 }
+
+// Add listeners
+spoofBtn.addEventListener('touchstart', runAway);
+spoofBtn.addEventListener('mouseover', runAway);
+
+// --- COUNTDOWN ---
+setInterval(() => {
+    const now = new Date().getTime();
+    const gap = new Date(bdayDate).getTime() - now;
+    
+    if(gap > 0) {
+        const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+        const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('timer').innerText = `${d}d : ${h}h : ${m}m`;
+    } else {
+        document.getElementById('timer').innerText = "PARTY TIME! 🎂";
+    }
+}, 1000);
 
 // --- CONFETTI ---
 function launchConfetti() {
     var duration = 3 * 1000;
-    var animationEnd = Date.now() + duration;
-    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-    var interval = setInterval(function() {
-        var timeLeft = animationEnd - Date.now();
-        if (timeLeft <= 0) return clearInterval(interval);
-        var particleCount = 50 * (timeLeft / duration);
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-    }, 250);
+    var end = Date.now() + duration;
+    (function frame() {
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+        if (Date.now() < end) requestAnimationFrame(frame);
+    }());
 }
-
-// Initialise
-window.onload = function() {
-    typeFlirtyLines();
-    startCountdown();
-};
