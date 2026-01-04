@@ -2,82 +2,484 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sona! 🌸</title>
     
-    <meta property="og:title" content="Happy Birthday Sona! 🎂">
-    <meta property="og:description" content="A special digital surprise for my favorite person. Click to open!">
-    <meta property="og:image" content="sona.jpg">
-    
-    <title>Warning: Cuteness Overload</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&family=VT323&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #FFB6D9 0%, #FF6B6B 100%);
+            --secondary-bg: #FFF8F0;
+            --text-dark: #4A3728;
+            --text-light: #6D5442;
+            --white: #ffffff;
+            --shadow-soft: 0 10px 30px rgba(255, 107, 107, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--secondary-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { color: var(--text-dark); }
+        h1 { font-family: 'Playfair Display', serif; }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #d6336c;
+        }
+        p { color: var(--text-light); }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .section { padding: 80px 0; position: relative; }
+        .text-center { text-align: center; }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-primary { background: var(--primary-gradient); color: var(--white); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3); }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- FALLING PETALS --- */
+        #petals-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .petal {
+            position: absolute; border-radius: 150% 0 150% 0;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translate(0, -10vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- HERO --- */
+        #hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; background: radial-gradient(circle at center, #fff0f5 0%, #FFF8F0 70%);
+            position: relative;
+        }
+        .hero-title {
+            font-size: 3.5rem; margin-bottom: 10px;
+            background: linear-gradient(to right, #e66465, #9198e5);
+            -webkit-background-clip: text; background-clip: text; color: #d6336c;
+        }
+        .hero-subtitle { font-size: 1.5rem; font-family: 'Poppins', sans-serif; margin-bottom: 30px; color: #666; }
+        .scroll-down {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            font-size: 2rem; animation: bounce 2s infinite; color: #FF6B6B; cursor: pointer;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -10px); } 60% { transform: translate(-50%, -5px); } }
+
+        /* --- FLOWERS --- */
+        #flowers { background-color: #fff; }
+        .flowers-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px; margin-top: 50px;
+        }
+        .flower-card {
+            background: white; padding: 30px; border-radius: 20px;
+            text-align: center; box-shadow: var(--shadow-soft);
+            transition: var(--transition); border-bottom: 4px solid transparent;
+        }
+        .flower-card:hover { transform: translateY(-10px); border-bottom: 4px solid #FF6B6B; }
+        .flower-icon { font-size: 4rem; margin-bottom: 15px; display: inline-block; transition: transform 0.5s ease; }
+        .flower-card:hover .flower-icon { transform: rotate(15deg) scale(1.1); }
+        .flower-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; color: #333; }
+        .flower-meaning { font-size: 0.95rem; font-style: italic; color: #777; }
+
+        /* --- REASONS --- */
+        #reasons { background-color: #FFF0F5; }
+        .reasons-container {
+            display: flex; flex-direction: column; gap: 20px;
+            max-width: 800px; margin: 40px auto 0;
+        }
+        .reason-card {
+            background: white; padding: 20px 30px; border-radius: 15px;
+            display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);
+            opacity: 0;
+        }
+        .reason-card:hover { transform: scale(1.02); background-color: #fffaf0; }
+        .reason-number {
+            background: var(--primary-gradient); color: white;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; flex-shrink: 0;
+        }
+        .reason-text { font-size: 1.1rem; }
+
+        /* --- NEW: JAGANNATH BLESSINGS SECTION --- */
+        #jagannath-blessings-section {
+            background: linear-gradient(to bottom, #ffffff, #fff8e7);
+            padding: 80px 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        #jagannath-blessings-section .section-title {
+            color: #d63384; 
+            font-family: 'Dancing Script', cursive, sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        #jagannath-blessings-section .subtitle {
+            color: #777; font-style: italic; margin-bottom: 50px;
+        }
+        .blessings-content {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 40px; max-width: 900px; margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .blessings-content { flex-direction: row; text-align: left; }
+        }
+        .deity-image-container {
+            position: relative; width: 280px; height: 280px; flex-shrink: 0;
+        }
+        .deity-img {
+            width: 100%; height: 100%; object-fit: cover;
+            border-radius: 50%; border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            position: relative; z-index: 2;
+        }
+        .image-glow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 110%; height: 110%;
+            background: radial-gradient(circle, rgba(255, 223, 0, 0.4) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%; z-index: 1;
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+        .blessings-message p { font-size: 1.1rem; line-height: 1.6; color: #444; margin-bottom: 20px; }
+        .blessings-message strong { color: #d63384; font-weight: 600; }
+        .odia-chant {
+            font-size: 1.5rem; font-weight: bold;
+            color: #ff8c00; margin-top: 30px; font-family: serif;
+        }
+
+        /* --- COUNTDOWN --- */
+        #countdown-section { background-color: #FF6B6B; color: white; text-align: center; padding: 60px 0; transition: background 1s ease; }
+        #countdown-section h2 { color: white; }
+        .timer-container { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .time-box {
+            background: rgba(255, 255, 255, 0.2); padding: 20px; border-radius: 10px;
+            min-width: 100px; backdrop-filter: blur(5px);
+        }
+        .time-val { font-size: 2.5rem; font-weight: 700; font-family: 'Montserrat', sans-serif; display: block; }
+        .time-label { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+
+        /* --- WISHES --- */
+        #wishes { text-align: center; padding-bottom: 100px; background: white; }
+        .message-card {
+            background: white; padding: 50px; border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); max-width: 800px;
+            margin: 0 auto; border: 1px solid #ffe6e6; position: relative;
+        }
+        .personal-message {
+            font-family: 'Great Vibes', cursive; font-size: 2rem;
+            color: #d6336c; line-height: 1.6; margin: 30px 0;
+        }
+        .sona-photo {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            margin: 0 auto 20px auto; display: block;
+            border: 4px solid #FFB6D9;
+        }
+
+        /* --- FOOTER --- */
+        footer { background: #333; color: white; text-align: center; padding: 30px 0; font-size: 0.9rem; }
+        footer span { color: #FF6B6B; }
+
+        /* --- CANVAS --- */
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .flower-icon { font-size: 3rem; }
+            .time-val { font-size: 1.8rem; }
+            .time-box { min-width: 70px; padding: 10px; }
+            .personal-message { font-size: 1.5rem; }
+            .reason-card { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
-    <div id="prank-screen">
-        <div class="terminal-box">
-            <div class="glitch-text">❤️ SYSTEM CRUSH ❤️</div>
-            <div id="typing-text" class="typing-area"></div>
-            <button id="spoof-btn">FIX MY HEART</button>
+    <div id="petals-container"></div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Happy Birthday, Sona! 🎂✨</h1>
+            <p class="hero-subtitle">Let's celebrate the wonderful person you are!</p>
+            <a href="#flowers" class="btn btn-primary">Start Celebration</a>
+            <div class="scroll-down" onclick="document.getElementById('flowers').scrollIntoView()">⌄</div>
         </div>
-    </div>
+    </section>
 
-    <div id="celebration-screen">
-        <audio id="bg-music" loop>
-            <source src="song.mp3" type="audio/mpeg">
-        </audio>
-
-        <div class="glass-card">
-            <div class="profile-wrapper">
-                <i class="fas fa-crown crown-icon"></i>
-                <img src="sona.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Sona">
-            </div>
-
-            <h1 class="elegant-title">Happy Birthday Sona!</h1>
+    <section id="flowers" class="section">
+        <div class="container">
+            <h2 class="text-center reveal">Flowers just for You 🌹</h2>
+            <p class="text-center reveal">I know how much you love them, so I picked these digitally for you.</p>
             
-            <div class="countdown-container">
-                <p class="timer-label">Countdown to the Queen's Day:</p>
-                <div id="countdown" class="timer-box">Loading...</div>
-            </div>
-
-            <p class="wish-text" id="wish-msg">Loading special wishes...</p>
-
-            <div class="timeline-section">
-                <h3>Our Journey ✨</h3>
-                <ul class="timeline">
-                    <li><span class="date">The Beginning</span><p>When we first met on Instagram.</p></li>
-                    <li><span class="date">The Vibe</span><p>Late night chats & endless edits.</p></li>
-                    <li><span class="date">Today (12 Jan)</span><p>Celebrating YOU!</p></li>
-                </ul>
-            </div>
-
-            <div style="margin: 20px 0;">
-                <p style="font-size: 0.8rem; color: #555;">Our Vibe Song 🎶</p>
-                <div style="background: rgba(255,255,255,0.6); padding: 10px; border-radius: 10px;">
-                    <i class="fab fa-spotify" style="color: #1DB954;"></i> Play "Kesariya"
+            <div class="flowers-grid">
+                <div class="flower-card reveal">
+                    <div class="flower-icon">🌹</div>
+                    <div class="flower-name">Red Roses</div>
+                    <div class="flower-meaning">Symbolizing admiration, deep respect, and love.</div>
+                </div>
+                <div class="flower-card reveal">
+                    <div class="flower-icon">🌻</div>
+                    <div class="flower-name">Sunflowers</div>
+                    <div class="flower-meaning">Because your vibe is warm, bright, and full of positivity.</div>
+                </div>
+                <div class="flower-card reveal">
+                    <div class="flower-icon">🌷</div>
+                    <div class="flower-name">Pink Tulips</div>
+                    <div class="flower-meaning">Representing care, good wishes, and affection.</div>
+                </div>
+                <div class="flower-card reveal">
+                    <div class="flower-icon">🌼</div>
+                    <div class="flower-name">Daisies</div>
+                    <div class="flower-meaning">For your innocence, purity, and cheerful spirit.</div>
+                </div>
+                <div class="flower-card reveal">
+                    <div class="flower-icon">🌺</div>
+                    <div class="flower-name">Orchids</div>
+                    <div class="flower-meaning">Exotic and beautiful, representing strength and charm.</div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="spiritual-box">
-                <img src="jagannath.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg'" class="jagannath-pic">
-                <div class="spiritual-quote">
-                    "May Mahaprabhu Jagannath bless your beautiful smile forever." <br>
-                    🙏 Jai Jagannath 🙏
+    <section id="reasons" class="section">
+        <div class="container">
+            <h2 class="text-center reveal">5 Reasons You're Special ✨</h2>
+            
+            <div class="reasons-container">
+                <div class="reason-card reveal-left">
+                    <div class="reason-number">1</div>
+                    <div class="reason-text">Your laugh is absolutely contagious; it lights up the whole room.</div>
+                </div>
+                <div class="reason-card reveal-right">
+                    <div class="reason-number">2</div>
+                    <div class="reason-text">You have a unique way of making everyone around you feel valued and heard.</div>
+                </div>
+                <div class="reason-card reveal-left">
+                    <div class="reason-number">3</div>
+                    <div class="reason-text">Your passion for the little things in life is inspiring.</div>
+                </div>
+                <div class="reason-card reveal-right">
+                    <div class="reason-number">4</div>
+                    <div class="reason-text">You are genuinely kind-hearted, a trait that is so rare today.</div>
+                </div>
+                <div class="reason-card reveal-left">
+                    <div class="reason-number">5</div>
+                    <div class="reason-text">You simply deserve all the happiness and success coming your way!</div>
                 </div>
             </div>
-
-            <a href="#" id="insta-link" class="insta-btn" target="_blank">
-                <i class="fab fa-instagram"></i> My Star
-            </a>
-            
-            <p style="font-size: 0.7rem; margin-top: 20px; opacity: 0.7;">Made with ❤️ by your Coder</p>
         </div>
-    </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script src="script.js"></script>
+    <section id="jagannath-blessings-section">
+        <div class="container reveal">
+            <h2 class="section-title">Divine Blessings for You 🙏</h2>
+            <p class="subtitle">(Because a celebration is incomplete without His grace)</p>
+    
+            <div class="blessings-content">
+                <div class="deity-image-container">
+                    <img src="jagannath.jpg" alt="Lord Jagannath" class="deity-img">
+                    <div class="image-glow"></div>
+                </div>
+    
+                <div class="blessings-message">
+                    <p>
+                        Sona, coming from the holy land of Odisha, your special day deserves special blessings.
+                    </p>
+                    <p>
+                        On your birthday, I pray that <strong>Mahaprabhu Jagannath</strong> showers His divine grace upon you. May He guide your steps, protect you always, and fill your life with immense joy, good health, and prosperity.
+                    </p>
+                    <p class="odia-chant">
+                        जय जगन्नाथ! <br>
+                        (Jai Jagannath!) 🕉️✨
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="countdown-section">
+        <div class="container">
+            <h2>Countdown to Celebration! ⏳</h2>
+            <div class="timer-container" id="timer">
+                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hours</span></div>
+                <div class="time-box"><span class="time-val" id="minutes">00</span><span class="time-label">Minutes</span></div>
+                <div class="time-box"><span class="time-val" id="seconds">00</span><span class="time-label">Seconds</span></div>
+            </div>
+            <p style="color: white; margin-top: 20px; font-size: 2rem; display: none; font-weight: bold;" id="bday-message">Happy Birthday!! 🎉✨</p>
+        </div>
+    </section>
+
+    <section id="wishes" class="section">
+        <div class="container reveal">
+            <h2>Birthday Wishes for You 🎉</h2>
+            <div class="message-card">
+                <img src="sona.jpg" alt="Sona" class="sona-photo" onerror="this.style.display='none'">
+                
+                <p class="personal-message">
+                    "Happy Birthday to someone who brings so much joy wherever they go. I truly value our conversations and the moments we share. Here's to celebrating YOU today and all the amazing things ahead! 🎂💕"
+                </p>
+                
+                <p style="margin-top: 20px; font-weight: bold; font-size: 1.1rem;">- With Love, [Apna Naam Yahan Likhein]</p> <br>
+                
+                <a href="mailto:sona@example.com?subject=Happy Birthday Sona!&body=Sending you lots of love on your special day!" class="btn btn-primary">Send a Birthday Wish 💌</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with <span>❤</span> and flowers just for Sona. © 2026</p>
+    </footer>
+
+    <script>
+        // --- 1. FALLING PETALS ---
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 20;
+            const colors = ['#FFC0CB', '#FFB6C1', '#FF69B4', '#FFF0F5', '#FFD700'];
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 10 + 5 + 'px';
+                petal.style.width = size;
+                petal.style.height = size;
+                container.appendChild(petal);
+            }
+        }
+        createPetals();
+
+        // --- 2. SCROLL REVEAL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('reveal-left') || entry.target.classList.contains('reveal-right')) {
+                        entry.target.style.transform = 'translateX(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal-left').forEach(el => {
+            el.style.transform = 'translateX(-50px)';
+            observer.observe(el);
+        });
+        document.querySelectorAll('.reveal-right').forEach(el => {
+            el.style.transform = 'translateX(50px)';
+            observer.observe(el);
+        });
+
+        // --- 3. COUNTDOWN TIMER ---
+        // UPDATED: Date set to 2026
+        const birthdayDate = new Date("October 25, 2026 00:00:00").getTime(); 
+
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                document.getElementById("timer").style.display = "none";
+                document.getElementById("bday-message").style.display = "block";
+                document.getElementById("countdown-section").style.background = "#FFD700";
+                startConfetti();
+                clearInterval(timerInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+
+        // --- 4. CONFETTI ---
+        function startConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const pieces = [];
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
+
+            for (let i = 0; i < 200; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 5 + 5,
+                    speed: Math.random() * 5 + 2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if (p.y > canvas.height) p.y = 0;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
 </body>
 </html>
