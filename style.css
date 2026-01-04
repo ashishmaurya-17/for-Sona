@@ -1,6 +1,6 @@
 /* --- GLOBAL VARIABLES --- */
 :root {
-    --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    /* Humne purana gradient hata diya hai, ab hum image use karenge */
     --terminal-bg: #1a0b0b;
     --neon-pink: #ff0055;
     --text-dark: #2d3436;
@@ -15,9 +15,11 @@ body {
     width: 100vw;
 }
 
-/* --- PRANK SCREEN --- */
+/* --- LAYER 1: PRANK SCREEN (Dark & Flirty) --- */
 #prank-screen {
     background-color: var(--terminal-bg);
+    /* Optional: Subtle dark pattern for terminal vibe */
+    background-image: radial-gradient(circle at 50% 50%, #2a0e0e 0%, #1a0b0b 100%);
     color: var(--neon-pink);
     height: 100vh;
     width: 100%;
@@ -60,27 +62,44 @@ body {
     touch-action: none; /* Critical for mobile */
 }
 
-/* --- REVEAL SCREEN --- */
+/* --- LAYER 2: REVEAL SCREEN (The Upgrade!) --- */
 #celebration-screen {
     display: none;
     height: 100vh;
     width: 100%;
-    background: var(--bg-gradient);
     overflow-y: auto;
-    animation: fadeIn 1.5s ease;
+    animation: fadeIn 2s ease; /* Slower fade for dramatic effect */
     padding-bottom: 50px;
+
+    /* --- NEW FLOWER BACKGROUND SETUP --- */
+    /* Hum yahan 2 layers use kar rahe hain:
+       1. Upar wali layer: Ek halka pink/white filter taaki text saaf dikhe.
+       2. Neeche wali layer: "Unbelievable Flowers" ki high-quality image.
+    */
+    background: 
+        linear-gradient(rgba(255, 154, 158, 0.4), rgba(255, 255, 255, 0.8)),
+        /* Maine ek bahut sundar aesthetic flower image ka link lagaya hai */
+        url('https://images.unsplash.com/photo-1568290739832-b03947de7e81?q=80&w=1974&auto=format&fit=crop') no-repeat center center;
+    
+    /* Isse image pure screen par fit ho jayegi */
+    background-size: cover;
+    
+    /* --- THE MAGIC TRICK (Fixed Background) --- */
+    /* Isse scroll karne par phool apni jagah ruke rahenge (Parallax effect) */
+    background-attachment: fixed;
 }
 
+/* Glass Card ko thoda aur transparent banaya taaki flowers dikhein */
 .glass-card {
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.35); /* Zyada transparent */
+    backdrop-filter: blur(15px); /* Zyada blur for premium glass look */
+    -webkit-backdrop-filter: blur(15px);
     margin: 60px 20px 20px 20px;
     padding: 25px 20px;
     border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     text-align: center;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 .profile-wrapper {
@@ -95,22 +114,24 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .crown-icon {
     position: absolute; top: -10px; right: 5px;
     font-size: 2rem; color: #ffd700;
     transform: rotate(20deg);
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
 }
 
 .elegant-title {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem; color: #d63031;
     margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
 }
 
-.wish-text { font-size: 1rem; color: #444; line-height: 1.5; margin-bottom: 20px; }
+.wish-text { font-size: 1rem; color: #2d3436; line-height: 1.5; margin-bottom: 20px; font-weight: 500; }
 
 /* Timeline CSS */
 .timeline-section { text-align: left; margin: 20px 10px; }
@@ -120,26 +141,29 @@ body {
 .timeline li::before {
     content: '❤'; position: absolute; left: -10px; top: 0;
     background: #fff; color: #ff0055; font-size: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 .date { font-weight: bold; color: #d35400; font-size: 0.85rem; display: block; }
 
 /* Spiritual & Misc */
 .spiritual-box {
-    background: #fff; border-radius: 15px; padding: 15px;
+    background: rgba(255, 255, 255, 0.9); /* Thoda solid taaki padha ja sake */
+    border-radius: 15px; padding: 15px;
     margin: 20px 0; border-top: 3px solid #ff9933;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .jagannath-pic { width: 100%; border-radius: 10px; margin-bottom: 10px; }
-.spiritual-quote { font-family: 'Playfair Display'; font-size: 0.95rem; color: #d35400; }
+.spiritual-quote { font-family: 'Playfair Display'; font-size: 0.95rem; color: #d35400; font-weight: 600; }
 
 .insta-btn {
     display: inline-block; padding: 12px 30px;
     background: linear-gradient(45deg, #f09433, #bc1888);
     color: white; text-decoration: none; border-radius: 50px;
-    font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.countdown-container { background: rgba(255,255,255,0.6); padding: 10px; border-radius: 10px; margin-bottom: 20px; }
-.timer-box { font-size: 1.5rem; font-weight: bold; color: #e84393; font-family: 'VT323'; }
+.countdown-container { background: rgba(255,255,255,0.7); padding: 10px; border-radius: 10px; margin-bottom: 20px; }
+.timer-box { font-size: 1.5rem; font-weight: bold; color: #e84393; font-family: 'VT323'; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
 
 @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
