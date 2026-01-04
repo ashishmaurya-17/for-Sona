@@ -1,7 +1,5 @@
-// --- CONFIGURATION ---
 const config = {
     name: "Sona",
-    // Birthday Year set to 2026 for next birthday (Update this year if needed)
     birthdayDate: "2026-01-12", 
     instaLink: "https://www.instagram.com/noor_editx1/",
     flirtyLines: [
@@ -13,7 +11,6 @@ const config = {
     ]
 };
 
-// --- FLIRTY TYPING ---
 let lineIndex = 0;
 let charIndex = 0;
 const typingArea = document.getElementById("typing-text");
@@ -33,19 +30,17 @@ function typeFlirtyLines() {
             }, 1500);
         }
     } else {
-        lineIndex = 0; // Loop messages
+        lineIndex = 0;
         typeFlirtyLines();
     }
 }
 
-// --- MOBILE RUNAWAY BUTTON ---
 const btn = document.getElementById("spoof-btn");
 let touchCount = 0;
 
 function moveButton(e) {
-    if (touchCount < 6) { // Run away 6 times
-        e.preventDefault(); // Stop click
-        
+    if (touchCount < 6) { 
+        e.preventDefault(); 
         const maxWidth = window.innerWidth - 150;
         const maxHeight = window.innerHeight - 100;
         const randomX = Math.max(10, Math.floor(Math.random() * maxWidth));
@@ -57,60 +52,44 @@ function moveButton(e) {
         
         const funnyTexts = ["NOPE! 😜", "TOO SLOW!", "TRY HARDER!", "CATCH ME!", "ALMOST...", "MISS ME?"];
         btn.innerText = funnyTexts[touchCount % funnyTexts.length];
-        
         touchCount++;
     } else {
-        // Stop moving
         btn.style.position = "static";
         btn.style.marginTop = "30px";
         btn.innerText = "OKAY, CLICK ME! 🎁";
         btn.style.background = "#ff0055";
         btn.style.color = "white";
         
-        // Remove runaway listeners
         btn.removeEventListener('touchstart', moveButton);
         btn.removeEventListener('mouseover', moveButton);
-        
-        // Enable Click
         btn.onclick = revealSurprise;
     }
 }
 
-// Add listeners for both touch and mouse
 btn.addEventListener('touchstart', moveButton, {passive: false}); 
 btn.addEventListener('mouseover', moveButton);
 
-// --- REVEAL SURPRISE ---
 function revealSurprise() {
     document.getElementById("prank-screen").style.display = "none";
     document.getElementById("celebration-screen").style.display = "block";
-    document.body.style.overflow = "auto"; // Enable scroll
+    document.body.style.overflow = "auto";
     
-    // Play Music
     const music = document.getElementById("bg-music");
-    music.play().catch(e => console.log("User interaction needed for audio"));
+    music.play().catch(e => console.log("Audio interaction needed"));
 
-    // Set Dynamic Text
     document.getElementById("wish-msg").innerText = 
         `Happy Birthday ${config.name}! From our random chats to this moment, you've been such a vibe. Keep shining! ✨`;
     document.getElementById("insta-link").href = config.instaLink;
 
-    // Confetti
     launchConfetti();
 }
 
-// --- COUNTDOWN ---
 function startCountdown() {
     const countDate = new Date(config.birthdayDate).getTime();
-    
     setInterval(() => {
         const now = new Date().getTime();
         const gap = countDate - now;
-
-        const second = 1000;
-        const minute = second * 60;
-        const hour = minute * 60;
-        const day = hour * 24;
+        const second = 1000; const minute = second * 60; const hour = minute * 60; const day = hour * 24;
 
         if (gap > 0) {
             const d = Math.floor(gap / day);
@@ -136,7 +115,6 @@ function launchConfetti() {
     }, 250);
 }
 
-// Init
 window.onload = function() {
     typeFlirtyLines();
     startCountdown();
