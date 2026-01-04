@@ -2,240 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>403 - Forbidden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Warning: Cuteness Overload</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,600;1,600&family=VT323&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        /* --- GLOBAL VARIABLES --- */
-        :root {
-            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            --glass: rgba(255, 255, 255, 0.25);
-            --border: rgba(255, 255, 255, 0.5);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            --primary-text: #2d3436;
-            --accent-pink: #e84393;
-            --accent-gold: #fdcb6e;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* No scroll during prank */
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* --- LAYER 1: HACKER TERMINAL (Retro Style) --- */
-        #hacker-screen {
-            background-color: #0c0c0c;
-            color: #33ff00;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'VT323', monospace; /* Pixel font */
-            z-index: 999;
-            position: fixed;
-            width: 100%;
-            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-        }
-
-        .terminal-box {
-            width: 80%;
-            max-width: 600px;
-            text-align: left;
-        }
-
-        .glitch-text {
-            font-size: 3rem;
-            text-shadow: 2px 0 red, -2px 0 blue;
-            animation: glitch 1s infinite;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .typing-area {
-            font-size: 1.5rem;
-            border-right: 2px solid #33ff00;
-            white-space: pre-wrap;
-            animation: blinkCursor 0.8s infinite;
-        }
-
-        /* The Runaway Button */
-        #spoof-btn {
-            margin-top: 50px;
-            padding: 15px 40px;
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            background: transparent;
-            color: #33ff00;
-            border: 2px solid #33ff00;
-            cursor: pointer;
-            position: relative; /* Changed to relative initially */
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            transition: 0.2s ease;
-            text-transform: uppercase;
-            box-shadow: 0 0 10px #33ff00;
-        }
-
-        #spoof-btn:hover {
-            background: #33ff00;
-            color: black;
-        }
-
-        /* --- LAYER 2: AESTHETIC REVEAL --- */
-        #reveal-screen {
-            display: none;
-            min-height: 100vh;
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 20px;
-            overflow-y: auto;
-            opacity: 0;
-            transition: opacity 2s ease;
-        }
-
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            max-width: 500px;
-            width: 100%;
-            animation: floatUp 1.5s ease-out;
-            position: relative;
-        }
-
-        /* Profile Image with Glow */
-        .profile-wrapper {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            margin: -80px auto 20px; /* Pulls image up */
-        }
-        
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .crown-icon {
-            position: absolute;
-            top: -15px;
-            right: 10px;
-            font-size: 2rem;
-            color: #ffd700;
-            transform: rotate(15deg);
-            animation: bounce 2s infinite;
-        }
-
-        /* Typography */
-        h1.elegant-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: #2d3436;
-            margin: 10px 0;
-            letter-spacing: -1px;
-            background: -webkit-linear-gradient(45deg, #d63384, #ff9933);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p.wish-text {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        /* Spiritual Section */
-        .spiritual-box {
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 20px 0;
-            border-left: 4px solid #ff9933;
-        }
-
-        .jagannath-pic {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .spiritual-quote {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #d35400;
-            font-weight: 600;
-        }
-
-        /* Insta Button */
-        .insta-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(220, 39, 67, 0.3);
-            transition: transform 0.3s;
-        }
-
-        .insta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(220, 39, 67, 0.5);
-        }
-
-        /* Animations */
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
-        @keyframes blinkCursor { 50% { border-color: transparent; } }
-        @keyframes floatUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0) rotate(15deg); } 50% { transform: translateY(-10px) rotate(15deg); } }
-
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="hacker-screen">
+    <div id="prank-screen">
         <div class="terminal-box">
-            <div class="glitch-text">⚠️ SYSTEM ERROR</div>
-            <div id="terminal-text" class="typing-area"></div>
-            <br>
-            <button id="spoof-btn" onmouseover="dodgeButton()" onclick="grantAccess()">FIX ISSUE</button>
+            <div class="glitch-text">❤️ SYSTEM CRUSH ❤️</div>
+            <div id="typing-text" class="typing-area"></div>
+            
+            <button id="spoof-btn">FIX MY HEART</button>
         </div>
     </div>
 
-    <div id="reveal-screen">
+    <div id="celebration-screen">
         <audio id="bg-music" loop>
             <source src="song.mp3" type="audio/mpeg">
         </audio>
@@ -246,146 +32,32 @@
                 <img src="sona.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Sona">
             </div>
 
-            <h1 id="bday-title" class="elegant-title">Happy Birthday!</h1>
+            <h1 class="elegant-title">Happy Birthday Sona!</h1>
             
-            <p id="bday-wish" class="wish-text">Loading special wishes...</p>
+            <div class="countdown-container">
+                <p class="timer-label">Countdown to the Queen's Day:</p>
+                <div id="countdown" class="timer-box">
+                    Loading...
+                </div>
+            </div>
+
+            <p class="wish-text" id="wish-msg">Loading wishes...</p>
 
             <div class="spiritual-box">
-                <img src="jagannath.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg'" class="jagannath-pic" alt="Lord Jagannath">
+                <img src="jagannath.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg'" class="jagannath-pic">
                 <div class="spiritual-quote">
-                    "May the divine blessings of Lord Jagannath bring peace, love, and creativity into your life." <br>
+                    "May Mahaprabhu Jagannath bless your beautiful smile forever." <br>
                     🙏 Jai Jagannath 🙏
                 </div>
             </div>
 
-            <a href="#" id="insta-action" class="insta-btn" target="_blank">
-                <i class="fab fa-instagram"></i> Visit Profile
+            <a href="#" id="insta-link" class="insta-btn" target="_blank">
+                <i class="fab fa-instagram"></i> My Star
             </a>
-            
-            <p style="font-size: 0.8rem; margin-top: 20px; color: #999;">Designed with ❤️</p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
-    <script>
-        // --- JSON DATA (Simulated Backend) ---
-        const data = {
-            name: "Sona",
-            instaLink: "https://www.instagram.com/noor_editx1/",
-            wish: "From random online chats to being a vibe! Keep slaying those edits and never stop smiling.",
-            hackerLines: [
-                "Scanning IP Address...",
-                "User: Sona Detected...",
-                "Analysing Cuteness Level...",
-                "Level Critical: Too High!",
-                "Initiating Birthday Protocol..."
-            ]
-        };
-
-        // --- HACKER TYPEWRITER EFFECT ---
-        let lineIndex = 0;
-        let charIndex = 0;
-        const terminal = document.getElementById("terminal-text");
-        const speed = 50;
-
-        function typeWriter() {
-            if (lineIndex < data.hackerLines.length) {
-                if (charIndex < data.hackerLines[lineIndex].length) {
-                    terminal.innerHTML += data.hackerLines[lineIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(typeWriter, speed);
-                } else {
-                    terminal.innerHTML += "<br>";
-                    lineIndex++;
-                    charIndex = 0;
-                    setTimeout(typeWriter, 300);
-                }
-            }
-        }
-
-        // --- BUTTON DODGE LOGIC ---
-        let dodgeCount = 0;
-        const btn = document.getElementById("spoof-btn");
-
-        function dodgeButton() {
-            if (dodgeCount < 5) {
-                const maxX = window.innerWidth - 200; // Keep within screen
-                const maxY = window.innerHeight - 100;
-                
-                const randomX = Math.floor(Math.random() * maxX);
-                const randomY = Math.floor(Math.random() * maxY);
-                
-                // Position absolute to move freely
-                btn.style.position = "absolute";
-                btn.style.left = randomX + "px";
-                btn.style.top = randomY + "px";
-
-                const taunts = ["NOPE! 😜", "TOO SLOW!", "TRY AGAIN", "CATCH ME!", "ALMOST THERE"];
-                btn.innerText = taunts[dodgeCount];
-                btn.style.borderColor = "red";
-                btn.style.color = "red";
-                
-                dodgeCount++;
-            } else {
-                // Stop moving
-                btn.style.position = "static"; // Back to normal flow
-                btn.style.margin = "50px auto";
-                btn.innerText = "OPEN SURPRISE 🎁";
-                btn.style.borderColor = "#fff";
-                btn.style.color = "#fff";
-                btn.style.background = "green";
-                btn.onclick = grantAccess; // Ensure click works now
-            }
-        }
-
-        // --- REVEAL LOGIC ---
-        function grantAccess() {
-            if(dodgeCount < 5) return; // Prevent early click if lucky
-
-            document.getElementById("hacker-screen").style.display = "none";
-            const revealScreen = document.getElementById("reveal-screen");
-            revealScreen.style.display = "flex";
-            
-            // Allow display flex to apply then fade in
-            setTimeout(() => {
-                revealScreen.style.opacity = "1";
-                document.body.style.overflow = "auto"; // Allow scrolling now
-            }, 100);
-
-            // Populate Data
-            document.getElementById("bday-title").innerText = `Happy Birthday ${data.name}!`;
-            document.getElementById("bday-wish").innerText = data.wish;
-            document.getElementById("insta-action").href = data.instaLink;
-
-            // Audio
-            const audio = document.getElementById("bg-music");
-            audio.play().catch(e => console.log("Audio needs interaction"));
-
-            // Confetti Blast
-            fireConfetti();
-        }
-
-        function fireConfetti() {
-            var duration = 3 * 1000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-            var interval = setInterval(function() {
-                var timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
-                var particleCount = 50 * (timeLeft / duration);
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-            }, 250);
-        }
-
-        // Start Typing on Load
-        window.onload = typeWriter;
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
