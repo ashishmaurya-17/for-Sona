@@ -1,0 +1,191 @@
+/* --- GLOBAL RESET --- */
+:root {
+    --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    --terminal-bg: #1a0b0b; /* Dark reddish black for flirty vibe */
+    --neon-pink: #ff0055;
+    --neon-green: #00ff99;
+    --text-dark: #2d3436;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden; /* Prevents scrolling during prank */
+    height: 100vh;
+    width: 100vw;
+}
+
+/* --- LAYER 1: FLIRTY TERMINAL --- */
+#prank-screen {
+    background-color: var(--terminal-bg);
+    color: var(--neon-pink);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+}
+
+.terminal-box {
+    width: 85%;
+    text-align: center;
+}
+
+.glitch-text {
+    font-family: 'VT323', monospace;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 0px #fff;
+    animation: pulse 1s infinite;
+    margin-bottom: 20px;
+}
+
+.typing-area {
+    font-family: 'VT323', monospace;
+    font-size: 1.4rem;
+    color: #fff;
+    min-height: 60px;
+    margin-bottom: 40px;
+}
+
+/* The Runaway Button */
+#spoof-btn {
+    padding: 15px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--neon-pink);
+    border: 2px solid var(--neon-pink);
+    border-radius: 50px;
+    transition: 0.1s ease; /* Super fast for mobile */
+    box-shadow: 0 0 15px var(--neon-pink);
+    /* Crucial for mobile spoofing */
+    touch-action: none; 
+}
+
+/* --- LAYER 2: CELEBRATION --- */
+#celebration-screen {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: var(--bg-gradient);
+    overflow-y: auto;
+    animation: fadeIn 1.5s ease;
+    padding-bottom: 50px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 60px 20px 20px 20px;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* Profile Pic */
+.profile-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: -80px auto 20px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.crown-icon {
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    font-size: 2rem;
+    color: #ffd700;
+    transform: rotate(20deg);
+}
+
+/* Typography */
+.elegant-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #d63031;
+    margin-bottom: 10px;
+}
+
+.wish-text {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Countdown */
+.countdown-container {
+    background: rgba(255,255,255,0.6);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.timer-label {
+    margin: 0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.timer-box {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e84393;
+    font-family: 'VT323', monospace;
+}
+
+/* Spiritual Section */
+.spiritual-box {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 20px 0;
+    border-top: 3px solid #ff9933;
+}
+
+.jagannath-pic {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.spiritual-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: #d35400;
+}
+
+/* Button */
+.insta-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #f09433, #bc1888);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
