@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sona!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff9933; /* Saffron for Spirituality */
+            --secondary: #d63384; /* Pink for Birthday vibe */
+            --bg: #fff5f0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg'); /* Optional BG Image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            margin: 0;
+            animation: fadeInDown 2s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 3s ease 1s forwards;
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 153, 51, 0.6);
+            animation: popIn 1.5s ease;
+        }
+
+        /* Lord Jagannath Section */
+        .spiritual-section {
+            padding: 60px 20px;
+            background: white;
+            border-top: 5px solid var(--primary);
+        }
+
+        .jagannath-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .blessing-text {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .jai-jagannath {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Friend Section */
+        .friend-section {
+            padding: 50px 20px;
+            background: #fdf2f7;
+        }
+
+        .insta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .insta-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background: #333;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://via.placeholder.com/150" id="userImage" class="profile-img" alt="Sona">
+        <h1 id="dynamicName">Happy Birthday!</h1>
+        <p class="subtitle" id="dynamicMessage">Loading...</p>
+    </header>
+
+    <div class="spiritual-section">
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg" class="jagannath-img" alt="Lord Jagannath">
+        <div class="blessing-text">
+            "On your special day, I pray to Mahaprabhu Jagannath to fill your life with colors, joy, and success."
+            <br>
+            May the blessings of Puri always be with you.
+            <span class="jai-jagannath">🙏 Jai Jagannath 🙏</span>
+        </div>
+    </div>
+
+    <div class="friend-section">
+        <h2>From Online to Heart 💫</h2>
+        <p>We haven't met in person yet, but your vibe matches perfectly! Keep shining and keep creating amazing edits.</p>
+        
+        <a href="" id="instaLink" class="insta-btn" target="_blank">
+            <i class="fab fa-instagram"></i> Visit Profile
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 - Coded with ❤️ for a special friend.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // JSON Data (Simulating a database fetch)
+        const birthdayData = {
+            "name": "Sona",
+            "instagram_id": "noor_editx1",
+            "instagram_url": "https://www.instagram.com/noor_editx1/",
+            "location": "Odisha",
+            "wish": "Wishing you the happiest birthday! May this year bring you closer to your dreams."
+        };
+
+        // JavaScript to load data from JSON object
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Setting Name
+            document.getElementById('dynamicName').innerText = `Happy Birthday ${birthdayData.name}! 🎉`;
+            
+            // Setting Message
+            document.getElementById('dynamicMessage').innerText = birthdayData.wish;
+            
+            // Setting Insta Link
+            document.getElementById('instaLink').href = birthdayData.instagram_url;
+            document.getElementById('instaLink').innerHTML = `<i class="fab fa-instagram"></i> @${birthdayData.instagram_id}`;
+
+            // Trigger Confetti
+            launchConfetti();
+        });
+
+        function launchConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
