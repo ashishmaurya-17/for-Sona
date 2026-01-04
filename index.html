@@ -3,74 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For Sona ✨</title>
+    <title>Warning: Cuteness Overload</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <audio id="bg-music" loop>
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
+    <div id="prank-screen">
+        <div class="terminal-box">
+            <div class="glitch-text">❤️ SYSTEM CRUSH ❤️</div>
+            <div id="typing-text" class="typing-area"></div>
+            
+            <button id="spoof-btn">FIX MY HEART</button>
+        </div>
+    </div>
 
-    <div class="main-container">
+    <div id="celebration-screen">
+        <audio id="bg-music" loop>
+            <source src="song.mp3" type="audio/mpeg">
+        </audio>
 
-        <section id="screen-1" class="screen active-screen">
-            <div class="glitch-box">
-                <div class="glitch-text">⚠️ SYSTEM ERROR</div>
-                <p class="sub-text">Cuteness Overload Detected...</p>
-                <button id="spoof-btn">FIX ISSUE</button>
+        <div class="glass-card">
+            <div class="profile-wrapper">
+                <i class="fas fa-crown crown-icon"></i>
+                <img src="sona.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Sona">
             </div>
-        </section>
 
-        <section id="screen-2" class="screen next-screen">
-            <div class="glass-card option-card">
-                <h2>Verify Identity 🔐</h2>
-                <p>Before we proceed, tell me:</p>
-                <p class="question">Who is the coolest editor?</p>
-                
-                <div class="options-container">
-                    <button class="option-btn" onclick="goToFinal()">Me (Sona) 😎</button>
-                    <button class="option-btn" onclick="goToFinal()">Also Me 👑</button>
+            <h1 class="elegant-title">Happy Birthday Sona!</h1>
+            
+            <div class="countdown-container">
+                <p class="timer-label">Countdown to the Queen's Day:</p>
+                <div id="countdown" class="timer-box">
+                    Loading...
                 </div>
-                <p class="hint-text">(Choose wisely...)</p>
             </div>
-        </section>
 
-        <section id="screen-3" class="screen next-screen">
-            <div class="glass-card final-card">
-                <div class="profile-wrapper">
-                    <i class="fas fa-crown crown-icon"></i>
-                    <img src="sona.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic">
+            <p class="wish-text" id="wish-msg">Loading wishes...</p>
+
+            <div class="spiritual-box">
+                <img src="jagannath.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg'" class="jagannath-pic">
+                <div class="spiritual-quote">
+                    "May Mahaprabhu Jagannath bless your beautiful smile forever." <br>
+                    🙏 Jai Jagannath 🙏
                 </div>
-
-                <h1 class="elegant-title">Happy Birthday Sona!</h1>
-                
-                <div class="countdown-box">
-                    <span id="timer">00d : 00h : 00m : 00s</span>
-                </div>
-
-                <p class="wish-text">
-                    The world got a little brighter (and edits got a lot better) on this day! ✨
-                </p>
-
-                <div class="spiritual-box">
-                    <img src="jagannath.jpg" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/f/ff/Lord_Jagannath_Puri.jpg'" class="jagannath-pic">
-                    <div class="spiritual-quote">
-                        "May Mahaprabhu Jagannath guide your path and fill your life with colors." <br>
-                        🙏 Jai Jagannath 🙏
-                    </div>
-                </div>
-
-                <a href="https://www.instagram.com/noor_editx1/" target="_blank" class="insta-btn">
-                    <i class="fab fa-instagram"></i> Open Insta
-                </a>
             </div>
-        </section>
 
+            <a href="#" id="insta-link" class="insta-btn" target="_blank">
+                <i class="fab fa-instagram"></i> My Star
+            </a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
