@@ -1,374 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Sona 🌸</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sona! 🌸</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 1. COLOR PALETTE & VARIABLES --- */
+        :root {
+            --bg-gradient: linear-gradient(180deg, #fff0f5 0%, #fff5ee 100%); /* Lighter, dreamier pink */
+            --text-main: #5d4037;
+            --text-light: #8d6e63; 
+            --accent-gold: #FFD700;
+            --accent-pink: #ff80ab;
+            --card-bg: rgba(255, 255, 255, 0.85); /* Glassmorphism base */
+            --shadow-soft: 0 15px 35px rgba(93, 64, 55, 0.1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --space-bg: #0B0E14; 
+        }
 
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        /* --- 2. GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
 
-<style>
-:root{
-    --pink:#d6336c;
-    --gold:#f7c873;
-    --bg:linear-gradient(180deg,#fff1f6,#fffaf3);
-    --text:#4a3728;
-    --soft:rgba(0,0,0,.1);
-}
+        h1, h2, h3 { color: var(--text-main); }
+        h1 { font-family: 'Playfair Display', serif; }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #c2185b;
+            letter-spacing: -0.5px;
+        }
 
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-    font-family:'Poppins',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-}
+        /* --- 3. UTILITIES & GLASSMORPHISM --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .section { padding: 90px 0; position: relative; }
+        .text-center { text-align: center; }
+        
+        /* Glass effect for cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-soft);
+            border-radius: 24px;
+        }
 
-/* ---------- Utilities ---------- */
-.container{max-width:1100px;margin:auto;padding:0 20px}
-.section{padding:90px 0}
-.center{text-align:center}
+        /* --- 4. ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* ---------- Floating Emojis ---------- */
-#float-layer{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-}
-.floater{
-    position:absolute;
-    top:-10vh;
-    font-size:1.6rem;
-    opacity:.7;
-    animation:fall linear infinite;
-}
-@keyframes fall{
-    0%{transform:translateY(0) rotate(0deg);opacity:0}
-    10%{opacity:.8}
-    100%{transform:translateY(120vh) rotate(360deg);opacity:0}
-}
+        /* Floating Alphabets & Flowers CSS */
+        #floating-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; overflow: hidden; /* Increased z-index */
+        }
+        .floater {
+            position: absolute;
+            top: -10vh;
+            animation-name: floatDown;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            font-family: 'Great Vibes', cursive; /* Fancy font for letters */
+            font-weight: bold;
+            opacity: 0.6;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        @keyframes floatDown {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
+        }
 
-/* ---------- Hero ---------- */
-#hero{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:relative;
-    z-index:1;
-}
-.hero-title{
-    font-family:'Playfair Display',serif;
-    font-size:4rem;
-    color:var(--pink);
-    text-shadow:2px 2px 0 var(--gold);
-    animation:scaleIn 1.2s ease;
-}
-.hero-sub{
-    font-size:1.4rem;
-    margin-top:15px;
-    color:#6d5442;
-}
-@keyframes scaleIn{
-    from{opacity:0;transform:scale(.85)}
-    to{opacity:1;transform:scale(1)}
-}
-.scroll{
-    position:absolute;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:2rem;
-    color:var(--pink);
-    animation:bounce 2s infinite;
-    cursor:pointer;
-}
-@keyframes bounce{
-    0%,100%{transform:translate(-50%,0)}
-    50%{transform:translate(-50%,-10px)}
-}
+        /* --- 5. HERO SECTION --- */
+        #hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
+        }
+        .hero-title {
+            font-size: 4.5rem; margin-bottom: 20px;
+            color: #d81b60; text-shadow: 3px 3px 0px rgba(255, 215, 0, 0.3);
+            animation: popIn 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hero-subtitle { 
+            font-size: 1.6rem; font-family: 'Poppins', sans-serif; 
+            margin-bottom: 40px; color: var(--text-light); 
+            max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+        
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-/* ---------- Blessings ---------- */
-.blessing-box{
-    background:rgba(255,255,255,.7);
-    border-top:5px solid var(--gold);
-    border-radius:25px;
-    padding:50px 30px;
-    box-shadow:0 20px 40px var(--soft);
-}
-.blessing-title{
-    font-family:'Great Vibes',cursive;
-    font-size:3rem;
-    color:var(--pink);
-}
-.blessing-grid{
-    display:flex;
-    gap:40px;
-    align-items:center;
-    flex-wrap:wrap;
-    margin-top:40px;
-}
-.blessing-grid img{
-    width:230px;
-    height:230px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid var(--gold);
-    box-shadow:0 0 25px rgba(247,200,115,.6);
-}
-.odia{
-    margin-top:15px;
-    font-weight:600;
-    color:#ff8c00;
-}
+        .scroll-down {
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            font-size: 2.2rem; animation: bounce 2.5s infinite; color: #c2185b; cursor: pointer;
+            transition: color 0.3s;
+        }
+        .scroll-down:hover { color: var(--accent-gold); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -15px); } 60% { transform: translate(-50%, -7px); } }
 
-/* ---------- Cards ---------- */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:30px;
-    margin-top:50px;
-}
-.card{
-    background:#fff;
-    padding:30px;
-    border-radius:22px;
-    box-shadow:0 15px 30px var(--soft);
-    transition:.35s;
-}
-.card:hover{
-    transform:translateY(-10px);
-}
-.icon{font-size:3.5rem}
+        /* --- 6. JAGANNATH BLESSINGS --- */
+        #jagannath-blessings-section {
+            border-top: none;
+            position: relative;
+        }
+        #jagannath-blessings-section::before {
+            content: ''; position: absolute; top: -50px; left: 0; width: 100%; height: 50px;
+            background: linear-gradient(to top, var(--bg-gradient), transparent);
+        }
+        .section-title {
+            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #c2185b; margin-bottom: 40px;
+        }
+        .blessings-content {
+            display: flex; flex-direction: column; align-items: center; gap: 50px; 
+        }
+        @media (min-width: 768px) {
+            .blessings-content { flex-direction: row; justify-content: center; text-align: left; }
+        }
+        .deity-img {
+            width: 280px; height: 280px; object-fit: cover;
+            border-radius: 50%; border: 8px solid white;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            background-color: #fceea7;
+            transition: transform 0.5s ease;
+        }
+        .deity-img:hover { transform: rotate(5deg) scale(1.05); }
+        .blessings-message { max-width: 600px; font-size: 1.15rem; }
+        .odia-chant { 
+            font-size: 1.8rem; font-weight: bold; 
+            background: linear-gradient(45deg, #ff8c00, #d81b60); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-top: 25px; 
+            display: inline-block;
+        }
 
-/* ---------- Constellation ---------- */
-#stars{
-    position:relative;
-    height:320px;
-    margin-top:40px;
-}
-.star{
-    position:absolute;
-    font-size:2rem;
-    cursor:pointer;
-    transition:.3s;
-}
-.star:hover{transform:scale(1.3)}
+        /* --- 7. COSMIC SECTION (Enhanced) --- */
+        #cosmic-section {
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            color: white; padding: 120px 0;
+            position: relative; overflow: hidden; text-align: center;
+        }
+        #star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .cosmic-content { position: relative; z-index: 2; }
+        .cosmic-title {
+            font-size: 3rem; margin-bottom: 25px;
+            background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
+        .cosmic-text { font-size: 1.3rem; max-width: 750px; margin: 0 auto 35px; line-height: 2; color: #b0bec5; font-weight: 300; }
+        
+        /* Rotating Planet Graphic using CSS */
+        .planet-container {
+            width: 100px; height: 100px; margin: 0 auto 30px;
+            border-radius: 50%; background: linear-gradient(45deg, #ff6b6b, #feca57);
+            box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
+            position: relative; animation: floatPlanet 6s ease-in-out infinite;
+        }
+        .planet-ring {
+            position: absolute; top: 50%; left: 50%; width: 160px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.3); border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+        }
+        @keyframes floatPlanet { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-/* ---------- Heartbeat ---------- */
-#heartbeat{
-    background:#111;
-    color:white;
-}
-#heart{
-    font-size:4rem;
-    opacity:0;
-    animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.2)}
-    100%{transform:scale(1)}
-}
+        /* --- 8. FLOWERS --- */
+        .flowers-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px; margin-top: 50px;
+        }
+        .flower-card {
+            padding: 35px 25px; transition: var(--transition); 
+            border: 1px solid rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.7);
+        }
+        .flower-card:hover { 
+            transform: translateY(-15px) scale(1.03); 
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12); 
+        }
+        .flower-icon { font-size: 4.5rem; display: block; margin-bottom: 15px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+        .flower-card h3 { font-family: 'Montserrat', sans-serif; color: #880e4f; margin-bottom: 10px; }
 
-/* ---------- Message ---------- */
-.message{
-    background:#fff;
-    padding:50px;
-    border-radius:25px;
-    box-shadow:0 25px 45px var(--soft);
-    max-width:800px;
-    margin:auto;
-}
-.message img{
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid var(--gold);
-    display:block;
-    margin:0 auto 20px;
-}
-.quote{
-    font-family:'Great Vibes',cursive;
-    font-size:2.2rem;
-    color:var(--pink);
-    margin:25px 0;
-}
+        /* --- 9. NEW SECTION: DIARY / LOVE LETTER (Creative Addition) --- */
+        #diary-section {
+            background-color: #fdfbf7;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 30px 30px; /* Dot grid paper effect */
+            padding: 100px 0;
+        }
+        .paper-sheet {
+            background: #fff; width: 100%; max-width: 700px; margin: 0 auto;
+            padding: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative; transform: rotate(-2deg);
+            font-family: 'Caveat', cursive; /* Handwriting font */
+        }
+        .paper-sheet::before {
+            content: ''; position: absolute; top: 0; left: 40px; height: 100%; width: 2px;
+            background: rgba(255, 0, 0, 0.1); /* Margin line */
+        }
+        .paper-content {
+            font-size: 1.8rem; color: #424242; line-height: 1.8; min-height: 200px;
+        }
+        .cursor {
+            display: inline-block; width: 3px; height: 1.5rem; background: #c2185b;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* ---------- Buttons ---------- */
-.actions{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-.btn{
-    padding:12px 26px;
-    border-radius:50px;
-    color:white;
-    font-weight:500;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    transition:.3s;
-}
-.btn:hover{transform:translateY(-3px)}
-.wa{background:#25d366}
-.ig{background:linear-gradient(45deg,#405de6,#e1306c)}
-.mail{background:#ea4335}
+        /* --- 10. REASONS --- */
+        .reason-card {
+            padding: 25px; border-radius: 20px; 
+            display: flex; align-items: center; gap: 25px;
+            border-left: 5px solid var(--accent-pink);
+        }
+        .reason-number {
+            background: var(--accent-pink); width: 50px; height: 50px; font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(255, 128, 171, 0.4);
+        }
+        .reason-text { font-size: 1.1rem; font-weight: 500; }
 
-/* ---------- Footer ---------- */
-footer{
-    background:#4a3728;
-    color:#fffaf3;
-    text-align:center;
-    padding:30px;
-    margin-top:60px;
-}
+        /* --- 11. COUNTDOWN --- */
+        #countdown-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            margin: 60px 0; border-radius: 0;
+        }
+        .time-box {
+            background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.6);
+            min-width: 100px; padding: 20px;
+        }
+        .time-val { color: #880e4f; font-size: 3rem; text-shadow: 2px 2px 0 rgba(255,255,255,0.5); }
+        .time-label { color: #880e4f; font-weight: 600; }
 
-/* ---------- Mobile ---------- */
-@media(max-width:768px){
-    .hero-title{font-size:2.6rem}
-    .quote{font-size:1.6rem}
-    .message{padding:30px 20px}
-}
-</style>
+        /* --- 12. MAKE A WISH --- */
+        .cake-container { width: 240px; height: 200px; transition: transform 0.2s; }
+        .cake-container:active { transform: scale(0.95); }
+        .cake-body { background: #ffccbc; height: 120px; border-radius: 15px 15px 0 0; }
+        .cake-frosting { background: #ffab91; top: 70px; height: 25px; }
+        .candle { height: 60px; width: 18px; bottom: 120px; }
+        .flame { width: 18px; height: 30px; top: -25px; background: #ffeb3b; box-shadow: 0 0 15px #ff9800; }
+
+        /* --- 13. WISHES --- */
+        .sona-photo {
+            width: 180px; height: 180px; border: 6px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- 14. FOOTER --- */
+        footer { background: #3e2723; color: #d7ccc8; font-size: 0.9rem; letter-spacing: 1px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
+            .section { padding: 60px 0; }
+            .paper-sheet { padding: 30px; width: 95%; transform: rotate(0deg); }
+            .paper-content { font-size: 1.4rem; }
+            .paper-sheet::before { left: 20px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div id="float-layer"></div>
+    <!-- Updated Floating Container for Flowers & Letters -->
+    <div id="floating-container"></div>
+    <canvas id="confetti-canvas"></canvas>
 
-<!-- HERO -->
-<section id="hero">
-<div class="container">
-    <h1 class="hero-title">Happy Birthday, Sona 🎂</h1>
-    <p class="hero-sub">Some people don’t just exist… they make life warmer.</p>
-</div>
-<div class="scroll" onclick="document.getElementById('bless').scrollIntoView()">
-    <i class="fas fa-chevron-down"></i>
-</div>
-</section>
-
-<!-- BLESSINGS -->
-<section id="bless" class="section">
-<div class="container blessing-box center">
-    <h2 class="blessing-title">Divine Blessings 🙏</h2>
-    <div class="blessing-grid">
-        <img src="jagannath.jpg" alt="Lord Jagannath">
-        <div>
-            <p>On your special day, I pray that <strong>Mahaprabhu Jagannath</strong> fills your life with peace, strength, and gentle happiness.</p>
-            <p class="odia">जय जगन्नाथ! 🕉️</p>
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Happy Birthday Sona</h1>
+            <p class="hero-subtitle">The universe danced the day you were born. Welcome to your special celebration.</p>
+            <div class="scroll-down" onclick="document.getElementById('jagannath-blessings-section').scrollIntoView()">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
-    </div>
-</div>
-</section>
+    </section>
 
-<!-- FLOWERS -->
-<section class="section center">
-<div class="container">
-<h2>Flowers Just For You 🌸</h2>
-<div class="grid">
-    <div class="card"><div class="icon">🌹</div><h3>Roses</h3><p>For admiration.</p></div>
-    <div class="card"><div class="icon">🌻</div><h3>Sunflowers</h3><p>Your smile.</p></div>
-    <div class="card"><div class="icon">🌺</div><h3>Orchids</h3><p>Rare presence.</p></div>
-    <div class="card"><div class="icon">🌷</div><h3>Tulips</h3><p>Calm & warmth.</p></div>
-</div>
-</div>
-</section>
+    <section id="jagannath-blessings-section">
+        <div class="container reveal">
+            <h2 class="text-center section-title">Divine Blessings</h2>
+            <div class="blessings-content">
+                <div class="deity-image-container">
+                    <!-- Placeholder. Replace with jagannath.jpg -->
+                    <img src="https://placehold.co/400x400/FFD700/ffffff?text=Jai+Jagannath" alt="Lord Jagannath" class="deity-img">
+                </div>
+                <div class="blessings-message glass-card" style="padding: 30px; border-radius: 20px;">
+                    <p>Sona, blessings from Odisha follow you wherever you go.</p>
+                    <p style="margin-top: 15px;">I pray that <strong>Lord Jagannath</strong> holds your hand through every challenge and turns every moment into a celebration of joy.</p>
+                    <div class="text-center">
+                        <p class="odia-chant">जय जगन्नाथ! (Jai Jagannath!) 🕉️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- CONSTELLATION -->
-<section class="section center">
-<div class="container">
-<h2>Touch the Stars ✨</h2>
-<p>Each one hides a feeling meant only for you.</p>
-<div id="stars"></div>
-</div>
-</section>
+    <!-- COSMIC SECTION -->
+    <section id="cosmic-section" class="reveal">
+        <canvas id="star-canvas"></canvas>
+        <div class="container cosmic-content">
+            <div class="planet-container">
+                <div class="planet-ring"></div>
+            </div>
+            <h2 class="cosmic-title">Written in the Stars</h2>
+            <p class="cosmic-text">
+                On <strong>January 12, 2026</strong>, the constellations align just for you.
+                Like a rare comet that graces the sky, your presence is a gift we cherish. 
+                Shine bright, Sona.
+            </p>
+            <div class="nasa-badge" style="background: rgba(255,255,255,0.15); padding: 12px 25px; border-radius: 50px; display: inline-block;">
+                <i class="fas fa-star"></i> Star ID: SONA-2026
+            </div>
+        </div>
+    </section>
 
-<!-- HEARTBEAT -->
-<section id="heartbeat" class="section center">
-<h2>One Quiet Moment ❤️</h2>
-<p>Close your eyes for 5 seconds…</p>
-<div id="heart">❤️</div>
-<p id="heartbeatText" style="display:none;margin-top:20px">
-That calm you felt —  
-that’s how your presence feels.
-</p>
-</section>
+    <!-- NEW DIARY SECTION (CREATIVE ADDITION) -->
+    <section id="diary-section">
+        <div class="container">
+            <h2 class="text-center section-title" style="margin-bottom: 50px;">A Note From My Heart ✍️</h2>
+            <div class="paper-sheet reveal">
+                <div class="paper-content">
+                    <span id="typewriter-text"></span><span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- MESSAGE -->
-<section class="section">
-<div class="message center">
-<img src="sona.jpg" onerror="this.style.display='none'">
-<p class="quote">
-“Some connections don’t need promises —  
-they simply feel right.”
-</p>
-<p><strong>— With warmth, Ashish</strong></p>
+    <section id="flowers" class="section">
+        <div class="container">
+            <h2 class="text-center reveal section-title">Blossoms of Love</h2>
+            <div class="flowers-grid">
+                <div class="flower-card glass-card reveal">
+                    <span class="flower-icon">🌹</span>
+                    <h3>Red Roses</h3>
+                    <p>Symbolizing the love and respect I have for you.</p>
+                </div>
+                <div class="flower-card glass-card reveal">
+                    <span class="flower-icon">🌻</span>
+                    <h3>Sunflowers</h3>
+                    <p>Because your happiness is my sunshine.</p>
+                </div>
+                <div class="flower-card glass-card reveal">
+                    <span class="flower-icon">🪷</span>
+                    <h3>Lotus</h3>
+                    <p>For your purity, grace, and divine energy.</p>
+                </div>
+                <div class="flower-card glass-card reveal">
+                    <span class="flower-icon">🌷</span>
+                    <h3>Tulips</h3>
+                    <p>Wishing you comfort, warmth, and endless joy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="actions">
-<a class="btn wa" href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-<a class="btn ig" href="#"><i class="fab fa-instagram"></i> Instagram</a>
-<a class="btn mail" href="#"><i class="fas fa-envelope"></i> Email</a>
-</div>
-</div>
-</section>
+    <section id="reasons" class="section">
+        <div class="container">
+            <h2 class="text-center reveal section-title">Why You're Special</h2>
+            <div class="reasons-container">
+                <div class="reason-card glass-card reveal">
+                    <div class="reason-number">1</div>
+                    <div class="reason-text">Your laugh is the sweetest melody I know.</div>
+                </div>
+                <div class="reason-card glass-card reveal">
+                    <div class="reason-number">2</div>
+                    <div class="reason-text">You have a heart of gold that cares for everyone.</div>
+                </div>
+                <div class="reason-card glass-card reveal">
+                    <div class="reason-number">3</div>
+                    <div class="reason-text">You inspire me to be a better person every day.</div>
+                </div>
+                <div class="reason-card glass-card reveal">
+                    <div class="reason-number">4</div>
+                    <div class="reason-text">Simply put, the world is better with you in it.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-<p>Made with ❤️ | 2026</p>
-</footer>
+    <section id="countdown-section">
+        <div class="container">
+            <h2 style="color: #880e4f; margin-bottom: 20px;">The Big Day Approaches! ⏳</h2>
+            <div class="timer-container" id="timer">
+                <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hours</span></div>
+                <div class="time-box"><span class="time-val" id="minutes">00</span><span class="time-label">Mins</span></div>
+                <div class="time-box"><span class="time-val" id="seconds">00</span><span class="time-label">Secs</span></div>
+            </div>
+            <p id="bday-message" style="display:none; font-size: 2.5rem; margin-top: 20px; font-weight: bold; color: #880e4f;">Happy Birthday Sona! 🎉</p>
+        </div>
+    </section>
 
-<script>
-/* Floating Emojis */
-const icons=['❤️','🌸','✨','💖','🌹'];
-const layer=document.getElementById('float-layer');
-for(let i=0;i<25;i++){
-    const e=document.createElement('div');
-    e.className='floater';
-    e.textContent=icons[Math.floor(Math.random()*icons.length)];
-    e.style.left=Math.random()*100+'vw';
-    e.style.animationDuration=10+Math.random()*10+'s';
-    e.style.animationDelay=Math.random()*5+'s';
-    layer.appendChild(e);
-}
+    <section id="make-wish" class="section">
+        <div class="container reveal text-center">
+            <h2 class="section-title">Make a Wish 🎂</h2>
+            <p style="font-size: 1.2rem; color: #5d4037;">Close your eyes, think of a dream, and tap the candle.</p>
+            
+            <div class="cake-container" onclick="blowCandle()" style="margin: 50px auto;">
+                <div class="cake-body"></div>
+                <div class="cake-frosting"></div>
+                <div class="candle">
+                    <div class="flame" id="flame"></div>
+                </div>
+            </div>
+            <div class="wish-message" id="wish-message"></div>
+        </div>
+    </section>
 
-/* Stars */
-const wishes=[
-"Your smile changes the energy of a room ✨",
-"You are stronger than you think 🌸",
-"Your presence feels safe 🤍",
-"You deserve soft happiness 💖",
-"You matter — deeply ⭐"
-];
-const stars=document.getElementById("stars");
-for(let i=0;i<wishes.length;i++){
-    const s=document.createElement("div");
-    s.className="star";
-    s.textContent="⭐";
-    s.style.left=Math.random()*90+"%";
-    s.style.top=Math.random()*80+"%";
-    s.onclick=()=>alert(wishes[i]);
-    stars.appendChild(s);
-}
+    <section id="wishes" class="section">
+        <div class="container reveal">
+            <div class="message-card glass-card text-center">
+                <!-- Placeholder. Replace with sona.jpg -->
+                <img src="https://placehold.co/400x400/e91e63/ffffff?text=Beautiful+Sona" alt="Sona" class="sona-photo">
+                
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; margin-top: 20px; color: #c2185b;">Happy Birthday!</h2>
+                <p class="personal-message" style="font-size: 1.5rem; color: #5d4037;">
+                    "Sona, may this year bring you as much happiness as you give to everyone around you. Keep shining, keep smiling, and know that you are cherished."
+                </p>
+                <div style="margin-top: 30px; font-size: 1.2rem; color: #8d6e63;">
+                    <i class="fas fa-heart" style="color: #c2185b;"></i><br>
+                    <strong>Ashish Maurya</strong>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* Heartbeat reveal */
-setTimeout(()=>{
-    document.getElementById("heart").style.opacity=1;
-    document.getElementById("heartbeatText").style.display="block";
-},5000);
-</script>
+    <footer>
+        <p>Crafted with love and stardust. © 2026</p>
+    </footer>
 
+    <script>
+        // --- 1. CONFIGURATION ---
+        const birthdayDate = new Date("January 12, 2026 00:00:00").getTime();
+        
+        // --- 2. ADVANCED FLOATING ELEMENTS (Letters & Flowers) ---
+        function createFloatingElements() {
+            const container = document.getElementById('floating-container');
+            
+            // Mix of Alphabets and Flowers
+            const elements = [
+                'S', 'O', 'N', 'A', 'H', 'A', 'P', 'P', 'Y', 'B', 'D', 'A', 'Y', // Letters
+                '🌸', '🌹', '🌻', '🌷', '🪷', '✨', '💖' // Icons
+            ]; 
+            
+            const count = 30; // Total floating elements
+
+            for (let i = 0; i < count; i++) {
+                const floater = document.createElement('div');
+                floater.classList.add('floater');
+                
+                // Randomly pick content
+                const content = elements[Math.floor(Math.random() * elements.length)];
+                floater.innerText = content;
+                
+                // Determine if it's a letter or emoji for specific styling if needed
+                if (content.length === 1 && content.match(/[A-Z]/)) {
+                    floater.style.color = Math.random() > 0.5 ? '#c2185b' : '#f57f17'; // Gold or Pink letters
+                    floater.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem'; // Larger letters
+                } else {
+                    floater.style.fontSize = Math.random() * 1 + 1 + 'rem'; // Normal emojis
+                }
+
+                // Random positioning 0-100vw
+                floater.style.left = Math.random() * 100 + 'vw';
+                
+                // SLOW ANIMATION (20s to 35s duration)
+                floater.style.animationDuration = Math.random() * 15 + 20 + 's'; 
+                floater.style.animationDelay = Math.random() * 20 + 's';
+                
+                container.appendChild(floater);
+            }
+        }
+        createFloatingElements();
+
+        // --- 3. TYPEWRITER EFFECT FOR DIARY ---
+        const diaryText = "Dear Sona,\n\nOn this special day, I just want to remind you how incredible you are. Your kindness touches hearts, and your strength moves mountains. \n\nMay your life always be filled with the fragrance of flowers and the blessings of the divine. \n\nHappy Birthday! \n\n- Ashish";
+        const typeWriterElement = document.getElementById('typewriter-text');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < diaryText.length) {
+                if (diaryText.charAt(i) === '\n') {
+                    typeWriterElement.innerHTML += '<br>';
+                } else {
+                    typeWriterElement.innerHTML += diaryText.charAt(i);
+                }
+                i++;
+                setTimeout(typeWriter, 50); // Typing speed
+            }
+        }
+
+        // Trigger typewriter when section is in view
+        const diaryObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && i === 0) {
+                    typeWriter();
+                }
+            });
+        }, { threshold: 0.5 });
+        diaryObserver.observe(document.getElementById('diary-section'));
+
+
+        // --- 4. SCROLL REVEAL (Standard) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 5. COUNTDOWN ---
+        const timerInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance < 0) {
+                document.getElementById("timer").style.display = "none";
+                document.getElementById("bday-message").style.display = "block";
+                startConfetti();
+                clearInterval(timerInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+
+        // --- 6. CANVAS ANIMATION (Starfield) ---
+        function initStarField() {
+            const canvas = document.getElementById('star-canvas');
+            const ctx = canvas.getContext('2d');
+            const section = document.getElementById('cosmic-section');
+            
+            function resize() {
+                canvas.width = section.offsetWidth;
+                canvas.height = section.offsetHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const stars = [];
+            for(let j=0; j<150; j++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    opacity: Math.random(),
+                    speed: Math.random() * 0.02
+                });
+            }
+
+            function animateStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                stars.forEach(star => {
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    star.opacity += star.speed;
+                    if(star.opacity > 1 || star.opacity < 0) star.speed = -star.speed;
+                });
+                requestAnimationFrame(animateStars);
+            }
+            animateStars();
+        }
+
+        // --- 7. CANDLE BLOW ---
+        function blowCandle() {
+            const flame = document.getElementById('flame');
+            const msg = document.getElementById('wish-message');
+            if(!flame.classList.contains('out')) {
+                flame.classList.add('out'); 
+                msg.innerText = "✨ May your wish reach the stars, Ashish! ✨";
+                msg.style.opacity = 1;
+                startConfetti(); 
+            }
+        }
+        
+        // --- 8. CONFETTI (Optimized) ---
+        function startConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const pieces = [];
+            const colors = ['#e91e63', '#ffeb3b', '#00bcd4', '#8bc34a'];
+            
+            for (let k = 0; k < 80; k++) { 
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 6 + 4,
+                    speed: Math.random() * 2 + 1, 
+                    wobble: Math.random() * 10
+                });
+            }
+            
+            function animateConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    p.wobble += 0.05;
+                    ctx.fillRect(p.x + Math.sin(p.wobble)*2, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if (p.y > canvas.height) p.y = 0;
+                });
+                requestAnimationFrame(animateConfetti);
+            }
+            animateConfetti();
+        }
+
+        window.onload = function() {
+            initStarField();
+        };
+
+    </script>
 </body>
 </html>
