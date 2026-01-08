@@ -162,16 +162,19 @@
         }
         .cosmic-text { font-size: 1.1rem; line-height: 1.8; color: #b0bec5; padding: 0 10px; }
         
-        .planet-container {
-            width: 80px; height: 80px; margin: 0 auto 20px;
-            border-radius: 50%; background: linear-gradient(45deg, #ff6b6b, #feca57);
-            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6);
-            position: relative; animation: floatPlanet 6s ease-in-out infinite;
+        /* Updated NASA Image Style */
+        .nasa-image-container {
+            width: 150px; height: 150px; margin: 0 auto 20px;
+            border-radius: 50%; 
+            box-shadow: 0 0 30px rgba(100, 200, 255, 0.4);
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 5;
+            animation: floatPlanet 6s ease-in-out infinite;
         }
-        .planet-ring {
-            position: absolute; top: 50%; left: 50%; width: 120px; height: 30px;
-            border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(-20deg);
+        .nasa-img {
+            width: 100%; height: 100%; object-fit: cover;
         }
         @keyframes floatPlanet { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
@@ -283,6 +286,9 @@
         .music-btn:active { transform: scale(0.9); }
         .music-btn.playing { animation: spinMusic 3s linear infinite; }
         @keyframes spinMusic { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* FIX: Moved the spin animation definition here from the HTML body */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* --- 17. NEW: SURPRISE GIFT BOX --- */
         .gift-container {
@@ -428,16 +434,18 @@
     <section id="cosmic-section" class="reveal">
         <canvas id="star-canvas"></canvas>
         <div class="container" style="position: relative; z-index: 2;">
-            <div class="planet-container">
-                <div class="planet-ring"></div>
+            <div class="nasa-image-container">
+                <img src="https://imagine.gsfc.nasa.gov/hst_bday/images/january-12-2019-andromeda-galaxy.jpg" alt="Andromeda Galaxy" class="nasa-img">
             </div>
             <h2 class="cosmic-title">Written in the Stars</h2>
             <p class="cosmic-text">
-                On <strong>January 12, 2026</strong>, the constellations align just for you.
-                Like a rare comet, your presence is a gift we cherish.
+                On the day you were born, <strong>January 12, 2005</strong>, the Hubble Telescope looked deep into space and found the <strong>Andromeda Galaxy</strong>.
+            </p>
+            <p class="cosmic-text" style="font-size: 1rem; margin-top: 5px;">
+                Like this vast galaxy, your spirit is beautiful and limitless. You are a gift to this universe.
             </p>
             <div style="background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 0.9rem;">
-                <i class="fas fa-star" style="color: #ffd700;"></i> ID: SONA-2026
+                <i class="fas fa-star" style="color: #ffd700;"></i> ID: SONA-12-01-2005
             </div>
         </div>
     </section>
@@ -472,10 +480,10 @@
                 <p style="margin-bottom: 20px; font-style: italic; color: #5d4037;">"A song that feels like you..."</p>
                 
                 <!-- Spotify Embed -->
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7eQl3Yqv359C1tjrDskCPe?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/18Sgw9PWiIMeqPaZZ3U7zb?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 
                 <div style="margin-top: 15px; font-size: 0.9rem; color: #888;">
-                    <i class="fas fa-headphones-alt"></i> Tum Se Hi - Jab We Met
+                    <i class="fas fa-headphones-alt"></i> Goriya Chand Ke Anjoriya - Manoj Tiwari
                 </div>
             </div>
         </div>
@@ -562,8 +570,7 @@
             </button>
             
             <div class="loading-spinner" id="ai-loader" style="display:none; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #7b1fa2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto;"></div>
-            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
+            
             <div class="ai-response-card glass-card" id="ai-card" style="margin-top: 30px; padding: 25px; display: none;">
                 <p class="ai-text" id="ai-wish-text" style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #4a148c;"></p>
                 <p style="font-size: 0.8rem; margin-top: 10px; color: #7b1fa2;">- Gemini AI 🌌</p>
