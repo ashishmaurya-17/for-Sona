@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Sona! 🌸</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,302 +14,410 @@
     <style>
         /* --- 1. COLOR PALETTE & VARIABLES --- */
         :root {
-            --bg-gradient: linear-gradient(180deg, #fff0f5 0%, #fff5ee 100%); /* Lighter, dreamier pink */
+            --bg-gradient: linear-gradient(180deg, #fff0f5 0%, #fff5ee 100%);
             --text-main: #5d4037;
             --text-light: #8d6e63; 
             --accent-gold: #FFD700;
             --accent-pink: #ff80ab;
-            --card-bg: rgba(255, 255, 255, 0.85); /* Glassmorphism base */
-            --shadow-soft: 0 15px 35px rgba(93, 64, 55, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --shadow-soft: 0 10px 25px rgba(93, 64, 55, 0.1); 
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --space-bg: #0B0E14; 
         }
 
-        /* --- 2. GLOBAL RESET --- */
+        /* --- 2. GLOBAL RESET & MOBILE DEFAULTS --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         
         body {
             font-family: 'Lato', sans-serif;
             background: var(--bg-gradient);
             color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.7;
+            line-height: 1.6;
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer; /* Encourage clicking */
         }
 
-        h1, h2, h3 { color: var(--text-main); }
+        h1, h2, h3 { color: var(--text-main); line-height: 1.2; }
         h1 { font-family: 'Playfair Display', serif; }
         h2 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             color: #c2185b;
             letter-spacing: -0.5px;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* --- 3. UTILITIES & GLASSMORPHISM --- */
+        /* --- 3. UTILITIES --- */
         .container {
+            width: 100%;
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
             z-index: 2;
         }
-        .section { padding: 90px 0; position: relative; }
+        .section { padding: 60px 0; position: relative; }
         .text-center { text-align: center; }
         
-        /* Glass effect for cards */
         .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: var(--shadow-soft);
-            border-radius: 24px;
+            border-radius: 20px;
         }
 
         /* --- 4. ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s ease; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Floating Alphabets & Flowers CSS */
+        /* Floating Alphabets & Flowers */
         #floating-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9999; overflow: hidden; /* Increased z-index */
+            pointer-events: none; z-index: 9999; overflow: hidden;
         }
         .floater {
             position: absolute;
             top: -10vh;
-            animation-name: floatDown;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            font-family: 'Great Vibes', cursive; /* Fancy font for letters */
+            animation: floatDown linear infinite;
+            font-family: 'Great Vibes', cursive;
             font-weight: bold;
             opacity: 0.6;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         @keyframes floatDown {
             0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
             10% { opacity: 0.8; }
-            50% { transform: translateY(50vh) rotate(180deg) translateX(20px); }
             100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
         }
 
         /* --- 5. HERO SECTION --- */
         #hero {
-            height: 100vh; display: flex; align-items: center; justify-content: center;
+            height: 100vh;
+            height: 100dvh;
+            display: flex; align-items: center; justify-content: center;
             text-align: center; position: relative;
             background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
+            padding: 0 15px;
         }
         .hero-title {
-            font-size: 4.5rem; margin-bottom: 20px;
-            color: #d81b60; text-shadow: 3px 3px 0px rgba(255, 215, 0, 0.3);
+            font-size: clamp(3rem, 12vw, 5rem); 
+            margin-bottom: 15px;
+            color: #d81b60; text-shadow: 2px 2px 0px rgba(255, 215, 0, 0.3);
             animation: popIn 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            line-height: 1.1;
         }
         .hero-subtitle { 
-            font-size: 1.6rem; font-family: 'Poppins', sans-serif; 
-            margin-bottom: 40px; color: var(--text-light); 
-            max-width: 600px; margin-left: auto; margin-right: auto;
+            font-size: 1.1rem; 
+            font-family: 'Poppins', sans-serif; 
+            margin-bottom: 30px; 
+            color: var(--text-light); 
+            max-width: 90%; 
+            margin-left: auto; 
+            margin-right: auto;
         }
-        
         @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         .scroll-down {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            font-size: 2.2rem; animation: bounce 2.5s infinite; color: #c2185b; cursor: pointer;
-            transition: color 0.3s;
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            font-size: 2rem; animation: bounce 2.5s infinite; color: #c2185b; cursor: pointer;
+            padding: 20px;
         }
-        .scroll-down:hover { color: var(--accent-gold); }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -15px); } 60% { transform: translate(-50%, -7px); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -15px); } }
 
-        /* --- 6. JAGANNATH BLESSINGS --- */
-        #jagannath-blessings-section {
-            border-top: none;
-            position: relative;
-        }
-        #jagannath-blessings-section::before {
-            content: ''; position: absolute; top: -50px; left: 0; width: 100%; height: 50px;
-            background: linear-gradient(to top, var(--bg-gradient), transparent);
-        }
-        .section-title {
-            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #c2185b; margin-bottom: 40px;
-        }
+        /* --- 6. BLESSINGS --- */
         .blessings-content {
-            display: flex; flex-direction: column; align-items: center; gap: 50px; 
-        }
-        @media (min-width: 768px) {
-            .blessings-content { flex-direction: row; justify-content: center; text-align: left; }
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            gap: 30px; 
         }
         .deity-img {
-            width: 280px; height: 280px; object-fit: cover;
-            border-radius: 50%; border: 8px solid white;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            width: 240px; height: 240px;
+            object-fit: cover;
+            border-radius: 50%; border: 6px solid white;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
             background-color: #fceea7;
-            transition: transform 0.5s ease;
         }
-        .deity-img:hover { transform: rotate(5deg) scale(1.05); }
-        .blessings-message { max-width: 600px; font-size: 1.15rem; }
-        .odia-chant { 
-            font-size: 1.8rem; font-weight: bold; 
-            background: linear-gradient(45deg, #ff8c00, #d81b60); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-top: 25px; 
-            display: inline-block;
+        .blessings-message { 
+            width: 100%; 
+            padding: 25px; 
+            text-align: center;
         }
 
-        /* --- 7. COSMIC SECTION (Enhanced) --- */
+        /* --- 7. COSMIC SECTION --- */
         #cosmic-section {
             background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            color: white; padding: 120px 0;
-            position: relative; overflow: hidden; text-align: center;
+            color: white; padding: 80px 0;
+            text-align: center; overflow: hidden;
         }
-        #star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        .cosmic-content { position: relative; z-index: 2; }
+        #star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .cosmic-title {
-            font-size: 3rem; margin-bottom: 25px;
+            font-size: 2.2rem;
             background: linear-gradient(to right, #e0c3fc, #8ec5fc);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             font-family: 'Playfair Display', serif;
         }
-        .cosmic-text { font-size: 1.3rem; max-width: 750px; margin: 0 auto 35px; line-height: 2; color: #b0bec5; font-weight: 300; }
+        .cosmic-text { font-size: 1.1rem; line-height: 1.8; color: #b0bec5; padding: 0 10px; }
         
-        /* Rotating Planet Graphic using CSS */
         .planet-container {
-            width: 100px; height: 100px; margin: 0 auto 30px;
+            width: 80px; height: 80px; margin: 0 auto 20px;
             border-radius: 50%; background: linear-gradient(45deg, #ff6b6b, #feca57);
-            box-shadow: 0 0 40px rgba(255, 107, 107, 0.6);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6);
             position: relative; animation: floatPlanet 6s ease-in-out infinite;
         }
         .planet-ring {
-            position: absolute; top: 50%; left: 50%; width: 160px; height: 40px;
-            border: 4px solid rgba(255,255,255,0.3); border-radius: 50%;
+            position: absolute; top: 50%; left: 50%; width: 120px; height: 30px;
+            border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
             transform: translate(-50%, -50%) rotate(-20deg);
         }
-        @keyframes floatPlanet { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes floatPlanet { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* --- 8. FLOWERS --- */
+        /* --- 8. FLOWERS GRID --- */
         .flowers-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px; margin-top: 50px;
+            display: grid; 
+            grid-template-columns: 1fr;
+            gap: 20px; margin-top: 30px;
         }
         .flower-card {
-            padding: 35px 25px; transition: var(--transition); 
-            border: 1px solid rgba(255,255,255,0.8);
-            background: rgba(255,255,255,0.7);
+            padding: 25px; 
+            display: flex; align-items: center; gap: 20px; text-align: left;
         }
-        .flower-card:hover { 
-            transform: translateY(-15px) scale(1.03); 
-            background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12); 
-        }
-        .flower-icon { font-size: 4.5rem; display: block; margin-bottom: 15px; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
-        .flower-card h3 { font-family: 'Montserrat', sans-serif; color: #880e4f; margin-bottom: 10px; }
+        .flower-icon { font-size: 3rem; margin-bottom: 0; }
+        .flower-card h3 { font-size: 1.2rem; margin: 0; }
+        .flower-card p { font-size: 0.95rem; line-height: 1.4; margin-top: 5px; }
 
-        /* --- 9. NEW SECTION: DIARY / LOVE LETTER (Creative Addition) --- */
+        /* --- 9. DIARY --- */
         #diary-section {
-            background-color: #fdfbf7;
-            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
-            background-size: 30px 30px; /* Dot grid paper effect */
-            padding: 100px 0;
+            background-size: 20px 20px;
+            padding: 60px 0;
         }
         .paper-sheet {
-            background: #fff; width: 100%; max-width: 700px; margin: 0 auto;
-            padding: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            position: relative; transform: rotate(-2deg);
-            font-family: 'Caveat', cursive; /* Handwriting font */
+            background: #fff; width: 100%; 
+            padding: 30px 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transform: rotate(0deg);
+            font-family: 'Caveat', cursive;
+            min-height: auto;
         }
-        .paper-sheet::before {
-            content: ''; position: absolute; top: 0; left: 40px; height: 100%; width: 2px;
-            background: rgba(255, 0, 0, 0.1); /* Margin line */
-        }
-        .paper-content {
-            font-size: 1.8rem; color: #424242; line-height: 1.8; min-height: 200px;
-        }
-        .cursor {
-            display: inline-block; width: 3px; height: 1.5rem; background: #c2185b;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .paper-sheet::before { left: 20px; }
+        .paper-content { font-size: 1.4rem; line-height: 1.6; }
 
         /* --- 10. REASONS --- */
-        .reason-card {
-            padding: 25px; border-radius: 20px; 
-            display: flex; align-items: center; gap: 25px;
-            border-left: 5px solid var(--accent-pink);
-        }
+        .reasons-container { display: flex; flex-direction: column; gap: 15px; }
+        .reason-card { padding: 20px; gap: 15px; }
         .reason-number {
-            background: var(--accent-pink); width: 50px; height: 50px; font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(255, 128, 171, 0.4);
+            min-width: 40px; height: 40px; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; color: white;
         }
-        .reason-text { font-size: 1.1rem; font-weight: 500; }
+        .reason-text { font-size: 1rem; }
 
         /* --- 11. COUNTDOWN --- */
-        #countdown-section {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            margin: 60px 0; border-radius: 0;
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .time-box {
-            background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.6);
-            min-width: 100px; padding: 20px;
+            background: rgba(255,255,255,0.5); 
+            min-width: 70px; padding: 10px;
+            flex: 1;
         }
-        .time-val { color: #880e4f; font-size: 3rem; text-shadow: 2px 2px 0 rgba(255,255,255,0.5); }
-        .time-label { color: #880e4f; font-weight: 600; }
+        .time-val { font-size: 2rem; display: block; line-height: 1; }
+        .time-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- 12. MAKE A WISH --- */
-        .cake-container { width: 240px; height: 200px; transition: transform 0.2s; }
-        .cake-container:active { transform: scale(0.95); }
-        .cake-body { background: #ffccbc; height: 120px; border-radius: 15px 15px 0 0; }
-        .cake-frosting { background: #ffab91; top: 70px; height: 25px; }
-        .candle { height: 60px; width: 18px; bottom: 120px; }
-        .flame { width: 18px; height: 30px; top: -25px; background: #ffeb3b; box-shadow: 0 0 15px #ff9800; }
+        .cake-container { transform: scale(0.9); margin: 30px auto; }
 
-        /* --- 13. WISHES --- */
+        /* --- 13. WISHES / PROFILE --- */
         .sona-photo {
-            width: 180px; height: 180px; border: 6px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            width: 160px; height: 160px; 
+            border: 5px solid white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            object-fit: cover;
+        }
+        .personal-message { font-size: 1.2rem; line-height: 1.6; padding: 0 10px; }
+
+        /* --- 14. GEMINI SECTION --- */
+        .magic-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 18px;
         }
 
-        /* --- 14. FOOTER --- */
-        footer { background: #3e2723; color: #d7ccc8; font-size: 0.9rem; letter-spacing: 1px; }
+        /* --- 15. NEW: MAGIC TOUCH HEARTS --- */
+        .touch-heart {
+            position: fixed;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23ff4081" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>') no-repeat center/contain;
+            pointer-events: none;
+            z-index: 10000;
+            animation: heartFade 1s ease-out forwards;
+        }
+        @keyframes heartFade {
+            0% { transform: scale(0.5) translateY(0); opacity: 1; }
+            100% { transform: scale(1.5) translateY(-50px) rotate(20deg); opacity: 0; }
+        }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3rem; }
-            .section { padding: 60px 0; }
-            .paper-sheet { padding: 30px; width: 95%; transform: rotate(0deg); }
-            .paper-content { font-size: 1.4rem; }
-            .paper-sheet::before { left: 20px; }
+        /* --- 16. NEW: MUSIC BUTTON --- */
+        .music-btn {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 50px; height: 50px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10001;
+            font-size: 1.2rem;
+            color: #d81b60;
+            cursor: pointer;
+            border: 2px solid #ff80ab;
+            transition: transform 0.3s;
+        }
+        .music-btn:active { transform: scale(0.9); }
+        .music-btn.playing { animation: spinMusic 3s linear infinite; }
+        @keyframes spinMusic { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* --- 17. NEW: SURPRISE GIFT BOX --- */
+        .gift-container {
+            perspective: 1000px;
+            width: 150px; height: 150px;
+            margin: 40px auto;
+            position: relative;
+            cursor: pointer;
+        }
+        .gift-box {
+            width: 100%; height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            animation: shake 3s infinite;
+        }
+        .gift-container:hover .gift-box { animation: none; }
+        
+        .gift-side {
+            position: absolute; width: 150px; height: 150px;
+            background: linear-gradient(135deg, #ff4081, #c60055);
+            border: 2px solid #ff80ab;
+        }
+        .gift-lid {
+            position: absolute; width: 160px; height: 40px;
+            background: #ff80ab;
+            top: -20px; left: -5px;
+            transform-origin: center;
+            z-index: 10;
+            transition: transform 0.5s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            /* FIX: Added backface-visibility to prevent glitching */
+            backface-visibility: hidden; 
+        }
+        .gift-bow {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            width: 40px; height: 30px; background: #ffd700;
+            border-radius: 50%;
+        }
+        
+        .gift-content {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 200px;
+            background: white; padding: 20px;
+            border-radius: 10px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: all 0.5s; 
+            z-index: 20; /* Keep high z-index */
+            pointer-events: none;
+        }
+        
+        /* FIX: Adjusted rotation to flip lid backwards completely */
+        .gift-open .gift-lid { 
+            transform: translateY(-40px) rotateX(-180deg); 
+            z-index: 5; /* Lower z-index when open so card is clearly on top */
+        }
+        
+        .gift-open .gift-content { 
+            transform: translate(-50%, -160%) scale(1); /* Lift card higher */
+            opacity: 1; 
+            pointer-events: auto; 
+        }
+        .gift-open .gift-box { animation: none; }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (min-width: 768px) {
+            .section { padding: 90px 0; }
+            h2 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.4rem; }
+            .blessings-content { flex-direction: row; text-align: left; justify-content: center; }
+            .blessings-message { text-align: left; width: auto; padding: 40px; }
+            .deity-img { width: 300px; height: 300px; }
+            .flowers-grid { grid-template-columns: repeat(2, 1fr); }
+            .flower-card { flex-direction: column; text-align: center; }
+            .flower-icon { margin-bottom: 15px; }
+            .paper-sheet { transform: rotate(-2deg); padding: 60px; }
+            .paper-content { font-size: 1.8rem; }
+            .magic-btn { width: auto; }
+        }
+        @media (min-width: 1024px) {
+            .flowers-grid { grid-template-columns: repeat(4, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Updated Floating Container for Flowers & Letters -->
+    <!-- Floating Container -->
     <div id="floating-container"></div>
-    <canvas id="confetti-canvas"></canvas>
+    <canvas id="confetti-canvas" style="position:fixed; top:0; left:0; pointer-events:none; z-index:1000;"></canvas>
+
+    <!-- Music Button -->
+    <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </div>
+    <!-- 
+        🔴 AUDIO INSTRUCTION:
+        Replace 'music.mp3' with a valid URL to an MP3 file.
+        Since browsers block auto-play, the user must click the button to start music.
+        Example Link (Royalty Free): https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
+    -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <section id="hero">
         <div class="container hero-content">
             <h1 class="hero-title">Happy Birthday Sona</h1>
-            <p class="hero-subtitle">The universe danced the day you were born. Welcome to your special celebration.</p>
+            <p class="hero-subtitle">The universe danced the day you were born.</p>
             <div class="scroll-down" onclick="document.getElementById('jagannath-blessings-section').scrollIntoView()">
                 <i class="fas fa-chevron-down"></i>
             </div>
         </div>
     </section>
 
-    <section id="jagannath-blessings-section">
+    <section id="jagannath-blessings-section" class="section">
         <div class="container reveal">
-            <h2 class="text-center section-title">Divine Blessings</h2>
+            <h2 class="text-center">Divine Blessings</h2>
             <div class="blessings-content">
                 <div class="deity-image-container">
-                    <!-- Placeholder. Replace with jagannath.jpg -->
-                    <img src="https://placehold.co/400x400/FFD700/ffffff?text=Jai+Jagannath" alt="Lord Jagannath" class="deity-img">
+                    <img src="https://i.ibb.co/M53NK8nt/jagannath.jpg" alt="Lord Jagannath" class="deity-img">
                 </div>
-                <div class="blessings-message glass-card" style="padding: 30px; border-radius: 20px;">
+                <div class="blessings-message glass-card">
                     <p>Sona, blessings from Odisha follow you wherever you go.</p>
-                    <p style="margin-top: 15px;">I pray that <strong>Lord Jagannath</strong> holds your hand through every challenge and turns every moment into a celebration of joy.</p>
+                    <p style="margin-top: 15px;">May <strong>Lord Jagannath</strong> hold your hand through every challenge and turn every moment into a celebration.</p>
                     <div class="text-center">
-                        <p class="odia-chant">जय जगन्नाथ! (Jai Jagannath!) 🕉️</p>
+                        <p style="margin-top: 25px; font-size: 1.5rem; font-weight: bold; background: linear-gradient(45deg, #ff8c00, #d81b60); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            जय जगन्नाथ! (Jai Jagannath!) 🕉️
+                        </p>
                     </div>
                 </div>
             </div>
@@ -319,29 +427,67 @@
     <!-- COSMIC SECTION -->
     <section id="cosmic-section" class="reveal">
         <canvas id="star-canvas"></canvas>
-        <div class="container cosmic-content">
+        <div class="container" style="position: relative; z-index: 2;">
             <div class="planet-container">
                 <div class="planet-ring"></div>
             </div>
             <h2 class="cosmic-title">Written in the Stars</h2>
             <p class="cosmic-text">
                 On <strong>January 12, 2026</strong>, the constellations align just for you.
-                Like a rare comet that graces the sky, your presence is a gift we cherish. 
-                Shine bright, Sona.
+                Like a rare comet, your presence is a gift we cherish.
             </p>
-            <div class="nasa-badge" style="background: rgba(255,255,255,0.15); padding: 12px 25px; border-radius: 50px; display: inline-block;">
-                <i class="fas fa-star"></i> Star ID: SONA-2026
+            <div style="background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 0.9rem;">
+                <i class="fas fa-star" style="color: #ffd700;"></i> ID: SONA-2026
             </div>
         </div>
     </section>
 
-    <!-- NEW DIARY SECTION (CREATIVE ADDITION) -->
+    <!-- SURPRISE GIFT SECTION -->
+    <section id="surprise-gift" class="section" style="background: #fff0f5;">
+        <div class="container reveal text-center">
+            <h2 style="color: #c2185b;">A Surprise for You!</h2>
+            <p style="margin-bottom: 20px;">Tap the box to open your gift.</p>
+            
+            <div class="gift-container" id="gift-box" onclick="openGift()">
+                <div class="gift-lid">
+                    <div class="gift-bow"></div>
+                </div>
+                <div class="gift-box">
+                    <div class="gift-side"></div>
+                </div>
+                <div class="gift-content">
+                    <h3 style="color: #d81b60; font-family: 'Great Vibes', cursive; font-size: 2rem;">Lifetime Happiness</h3>
+                    <p style="font-size: 0.9rem;">Coupon Valid Forever!</p>
+                    <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">No expiry date.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: SPOTIFY SECTION -->
+    <section id="music-dedication" class="section">
+        <div class="container reveal">
+            <h2 class="text-center" style="margin-bottom: 30px;">Melody of Heart 🎵</h2>
+            <div class="glass-card" style="padding: 20px; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <p style="margin-bottom: 20px; font-style: italic; color: #5d4037;">"A song that feels like you..."</p>
+                
+                <!-- Spotify Embed -->
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7eQl3Yqv359C1tjrDskCPe?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                
+                <div style="margin-top: 15px; font-size: 0.9rem; color: #888;">
+                    <i class="fas fa-headphones-alt"></i> Tum Se Hi - Jab We Met
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIARY SECTION -->
     <section id="diary-section">
         <div class="container">
-            <h2 class="text-center section-title" style="margin-bottom: 50px;">A Note From My Heart ✍️</h2>
+            <h2 class="text-center" style="margin-bottom: 30px; font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c2185b;">A Note for You</h2>
             <div class="paper-sheet reveal">
                 <div class="paper-content">
-                    <span id="typewriter-text"></span><span class="cursor"></span>
+                    <span id="typewriter-text"></span><span style="display: inline-block; width: 2px; height: 1.2rem; background: #c2185b; animation: blink 1s infinite;"></span>
                 </div>
             </div>
         </div>
@@ -349,27 +495,35 @@
 
     <section id="flowers" class="section">
         <div class="container">
-            <h2 class="text-center reveal section-title">Blossoms of Love</h2>
+            <h2 class="text-center reveal">Blossoms of Love</h2>
             <div class="flowers-grid">
                 <div class="flower-card glass-card reveal">
                     <span class="flower-icon">🌹</span>
-                    <h3>Red Roses</h3>
-                    <p>Symbolizing the love and respect I have for you.</p>
+                    <div>
+                        <h3>Red Roses</h3>
+                        <p>For love & respect.</p>
+                    </div>
                 </div>
                 <div class="flower-card glass-card reveal">
                     <span class="flower-icon">🌻</span>
-                    <h3>Sunflowers</h3>
-                    <p>Because your happiness is my sunshine.</p>
+                    <div>
+                        <h3>Sunflowers</h3>
+                        <p>Your sunshine smile.</p>
+                    </div>
                 </div>
                 <div class="flower-card glass-card reveal">
                     <span class="flower-icon">🪷</span>
-                    <h3>Lotus</h3>
-                    <p>For your purity, grace, and divine energy.</p>
+                    <div>
+                        <h3>Lotus</h3>
+                        <p>Grace & purity.</p>
+                    </div>
                 </div>
                 <div class="flower-card glass-card reveal">
                     <span class="flower-icon">🌷</span>
-                    <h3>Tulips</h3>
-                    <p>Wishing you comfort, warmth, and endless joy.</p>
+                    <div>
+                        <h3>Tulips</h3>
+                        <p>Comfort & joy.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -377,68 +531,84 @@
 
     <section id="reasons" class="section">
         <div class="container">
-            <h2 class="text-center reveal section-title">Why You're Special</h2>
+            <h2 class="text-center reveal" style="margin-bottom: 40px;">Why You're Special</h2>
             <div class="reasons-container">
-                <div class="reason-card glass-card reveal">
-                    <div class="reason-number">1</div>
-                    <div class="reason-text">Your laugh is the sweetest melody I know.</div>
+                <div class="reason-card glass-card reveal" style="display:flex; align-items:center; border-left: 5px solid #ff80ab;">
+                    <div class="reason-number" style="background: #ff80ab;">1</div>
+                    <div class="reason-text">Your laugh is the sweetest melody.</div>
                 </div>
-                <div class="reason-card glass-card reveal">
-                    <div class="reason-number">2</div>
-                    <div class="reason-text">You have a heart of gold that cares for everyone.</div>
+                <div class="reason-card glass-card reveal" style="display:flex; align-items:center; border-left: 5px solid #ff80ab;">
+                    <div class="reason-number" style="background: #ff80ab;">2</div>
+                    <div class="reason-text">You have a heart of gold.</div>
                 </div>
-                <div class="reason-card glass-card reveal">
-                    <div class="reason-number">3</div>
-                    <div class="reason-text">You inspire me to be a better person every day.</div>
-                </div>
-                <div class="reason-card glass-card reveal">
-                    <div class="reason-number">4</div>
-                    <div class="reason-text">Simply put, the world is better with you in it.</div>
+                <div class="reason-card glass-card reveal" style="display:flex; align-items:center; border-left: 5px solid #ff80ab;">
+                    <div class="reason-number" style="background: #ff80ab;">3</div>
+                    <div class="reason-text">You inspire me to be better.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="countdown-section">
-        <div class="container">
-            <h2 style="color: #880e4f; margin-bottom: 20px;">The Big Day Approaches! ⏳</h2>
+    <!-- GEMINI AI SECTION -->
+    <section id="gemini-magic-section" class="section" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);">
+        <div class="container reveal text-center">
+            <h2 style="color: #6a1b9a;">Cosmic AI Whispers ✨</h2>
+            <p style="margin-bottom: 25px; font-size: 1rem; color: #5d4037;">
+                Tap below for a magical wish from the Universe.
+            </p>
+            
+            <button class="magic-btn" onclick="generateMagicWish()" style="background: linear-gradient(45deg, #7b1fa2, #ba68c8); color: white; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(123, 31, 162, 0.3);">
+                <i class="fas fa-magic"></i> Generate Magical Wish
+            </button>
+            
+            <div class="loading-spinner" id="ai-loader" style="display:none; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #7b1fa2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto;"></div>
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+            <div class="ai-response-card glass-card" id="ai-card" style="margin-top: 30px; padding: 25px; display: none;">
+                <p class="ai-text" id="ai-wish-text" style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #4a148c;"></p>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #7b1fa2;">- Gemini AI 🌌</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="countdown-section" style="padding: 50px 0; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+        <div class="container text-center">
+            <h2 style="color: #880e4f; margin-bottom: 25px; font-size: 1.8rem;">The Big Day ⏳</h2>
             <div class="timer-container" id="timer">
                 <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
-                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hours</span></div>
+                <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
                 <div class="time-box"><span class="time-val" id="minutes">00</span><span class="time-label">Mins</span></div>
                 <div class="time-box"><span class="time-val" id="seconds">00</span><span class="time-label">Secs</span></div>
             </div>
-            <p id="bday-message" style="display:none; font-size: 2.5rem; margin-top: 20px; font-weight: bold; color: #880e4f;">Happy Birthday Sona! 🎉</p>
+            <p id="bday-message" style="display:none; font-size: 2rem; margin-top: 20px; font-weight: bold; color: #880e4f;">Happy Birthday Sona! 🎉</p>
         </div>
     </section>
 
     <section id="make-wish" class="section">
         <div class="container reveal text-center">
-            <h2 class="section-title">Make a Wish 🎂</h2>
-            <p style="font-size: 1.2rem; color: #5d4037;">Close your eyes, think of a dream, and tap the candle.</p>
+            <h2>Make a Wish 🎂</h2>
+            <p style="color: #5d4037; margin-bottom: 20px;">Tap the candle flame!</p>
             
-            <div class="cake-container" onclick="blowCandle()" style="margin: 50px auto;">
-                <div class="cake-body"></div>
-                <div class="cake-frosting"></div>
-                <div class="candle">
-                    <div class="flame" id="flame"></div>
-                </div>
+            <div class="cake-container" onclick="blowCandle()" style="width: 200px; height: 160px; position: relative; margin: 0 auto; cursor: pointer;">
+                <div class="cake-body" style="background: #ffccbc; height: 100px; width: 100%; position: absolute; bottom: 0; border-radius: 15px 15px 0 0;"></div>
+                <div class="cake-frosting" style="background: #ffab91; height: 20px; width: 100%; position: absolute; bottom: 80px; border-radius: 10px;"></div>
+                <div class="candle" style="background: white; width: 15px; height: 40px; position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%);"></div>
+                <div class="flame" id="flame" style="width: 15px; height: 25px; background: #ffeb3b; border-radius: 50% 50% 20% 20%; position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 15px #ff9800; transition: opacity 0.3s;"></div>
             </div>
-            <div class="wish-message" id="wish-message"></div>
+            <div class="wish-message" id="wish-message" style="opacity: 0; transition: opacity 1s; color: #d81b60; font-weight: bold; margin-top: 20px;"></div>
         </div>
     </section>
 
     <section id="wishes" class="section">
         <div class="container reveal">
-            <div class="message-card glass-card text-center">
-                <!-- Placeholder. Replace with sona.jpg -->
-                <img src="https://placehold.co/400x400/e91e63/ffffff?text=Beautiful+Sona" alt="Sona" class="sona-photo">
+            <div class="message-card glass-card text-center" style="padding: 40px 20px;">
+                <img src="https://i.ibb.co/8DR7TCQk/Sona.jpg" alt="Beautiful Sona" class="sona-photo" style="border-radius: 50%;">
                 
                 <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; margin-top: 20px; color: #c2185b;">Happy Birthday!</h2>
-                <p class="personal-message" style="font-size: 1.5rem; color: #5d4037;">
-                    "Sona, may this year bring you as much happiness as you give to everyone around you. Keep shining, keep smiling, and know that you are cherished."
+                <p class="personal-message">
+                    "Sona, may this year bring you as much happiness as you give to everyone around you. Keep shining, keep smiling."
                 </p>
-                <div style="margin-top: 30px; font-size: 1.2rem; color: #8d6e63;">
+                <div style="margin-top: 30px; font-size: 1.1rem; color: #8d6e63;">
                     <i class="fas fa-heart" style="color: #c2185b;"></i><br>
                     <strong>Ashish Maurya</strong>
                 </div>
@@ -446,58 +616,96 @@
         </div>
     </section>
 
-    <footer>
+    <footer style="background: #3e2723; color: #d7ccc8; padding: 30px 0; text-align: center; font-size: 0.9rem;">
         <p>Crafted with love and stardust. © 2026</p>
     </footer>
 
     <script>
-        // --- 1. CONFIGURATION ---
+        // --- CONFIGURATION ---
         const birthdayDate = new Date("January 12, 2026 00:00:00").getTime();
         
-        // --- 2. ADVANCED FLOATING ELEMENTS (Letters & Flowers) ---
+        // --- FLOATING ELEMENTS ---
         function createFloatingElements() {
             const container = document.getElementById('floating-container');
-            
-            // Mix of Alphabets and Flowers
-            const elements = [
-                'S', 'O', 'N', 'A', 'H', 'A', 'P', 'P', 'Y', 'B', 'D', 'A', 'Y', // Letters
-                '🌸', '🌹', '🌻', '🌷', '🪷', '✨', '💖' // Icons
-            ]; 
-            
-            const count = 30; // Total floating elements
+            const elements = ['🌸', '🌹', '✨', '💖', 'S', 'O', 'N', 'A']; 
+            const count = window.innerWidth < 768 ? 15 : 30; 
 
             for (let i = 0; i < count; i++) {
                 const floater = document.createElement('div');
                 floater.classList.add('floater');
-                
-                // Randomly pick content
-                const content = elements[Math.floor(Math.random() * elements.length)];
-                floater.innerText = content;
-                
-                // Determine if it's a letter or emoji for specific styling if needed
-                if (content.length === 1 && content.match(/[A-Z]/)) {
-                    floater.style.color = Math.random() > 0.5 ? '#c2185b' : '#f57f17'; // Gold or Pink letters
-                    floater.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem'; // Larger letters
-                } else {
-                    floater.style.fontSize = Math.random() * 1 + 1 + 'rem'; // Normal emojis
-                }
-
-                // Random positioning 0-100vw
+                floater.innerText = elements[Math.floor(Math.random() * elements.length)];
+                floater.style.fontSize = Math.random() * 1 + 1 + 'rem';
                 floater.style.left = Math.random() * 100 + 'vw';
-                
-                // SLOW ANIMATION (20s to 35s duration)
-                floater.style.animationDuration = Math.random() * 15 + 20 + 's'; 
-                floater.style.animationDelay = Math.random() * 20 + 's';
-                
+                floater.style.animationDuration = Math.random() * 10 + 15 + 's'; 
+                floater.style.animationDelay = Math.random() * 10 + 's';
                 container.appendChild(floater);
             }
         }
         createFloatingElements();
 
-        // --- 3. TYPEWRITER EFFECT FOR DIARY ---
-        const diaryText = "Dear Sona,\n\nOn this special day, I just want to remind you how incredible you are. Your kindness touches hearts, and your strength moves mountains. \n\nMay your life always be filled with the fragrance of flowers and the blessings of the divine. \n\nHappy Birthday! \n\n- Ashish";
+        // --- NEW: MUSIC PLAYER ---
+        function toggleMusic() {
+            const audio = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                btn.classList.add('playing');
+            } else {
+                audio.pause();
+                btn.innerHTML = '<i class="fas fa-music"></i>';
+                btn.classList.remove('playing');
+            }
+        }
+
+        // --- NEW: SURPRISE GIFT ---
+        function openGift() {
+            const container = document.getElementById('gift-box');
+            if (!container.classList.contains('gift-open')) {
+                container.classList.add('gift-open');
+                startConfetti();
+            }
+        }
+
+        // --- NEW: MAGIC TOUCH TRAIL ---
+        document.addEventListener('mousemove', function(e) { createHeart(e.clientX, e.clientY); });
+        document.addEventListener('touchmove', function(e) { 
+            // Get touch position
+            if(e.touches.length > 0) {
+                createHeart(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, {passive: true});
+
+        function createHeart(x, y) {
+            // Throttle creation
+            if (Math.random() > 0.1) return; 
+            
+            const heart = document.createElement('div');
+            heart.classList.add('touch-heart');
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 1000);
+        }
+
+        // --- TYPEWRITER ---
+        const diaryText = "Dear Sona,\n\nOn this special day, I just want to remind you how incredible you are. Your kindness touches hearts. \n\nHappy Birthday! \n\n- Ashish";
         const typeWriterElement = document.getElementById('typewriter-text');
         let i = 0;
+        let hasTyped = false;
+
+        const diaryObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasTyped) {
+                    hasTyped = true;
+                    typeWriter();
+                }
+            });
+        }, { threshold: 0.3 });
+        diaryObserver.observe(document.getElementById('diary-section'));
 
         function typeWriter() {
             if (i < diaryText.length) {
@@ -507,22 +715,11 @@
                     typeWriterElement.innerHTML += diaryText.charAt(i);
                 }
                 i++;
-                setTimeout(typeWriter, 50); // Typing speed
+                setTimeout(typeWriter, 50);
             }
         }
 
-        // Trigger typewriter when section is in view
-        const diaryObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && i === 0) {
-                    typeWriter();
-                }
-            });
-        }, { threshold: 0.5 });
-        diaryObserver.observe(document.getElementById('diary-section'));
-
-
-        // --- 4. SCROLL REVEAL (Standard) ---
+        // --- SCROLL REVEAL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -532,7 +729,7 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // --- 5. COUNTDOWN ---
+        // --- COUNTDOWN ---
         const timerInterval = setInterval(function() {
             const now = new Date().getTime();
             const distance = birthdayDate - now;
@@ -556,7 +753,7 @@
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
         }, 1000);
 
-        // --- 6. CANVAS ANIMATION (Starfield) ---
+        // --- STARS ---
         function initStarField() {
             const canvas = document.getElementById('star-canvas');
             const ctx = canvas.getContext('2d');
@@ -570,7 +767,8 @@
             window.addEventListener('resize', resize);
 
             const stars = [];
-            for(let j=0; j<150; j++) {
+            const starCount = window.innerWidth < 768 ? 50 : 150; 
+            for(let j=0; j<starCount; j++) {
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -596,19 +794,19 @@
             animateStars();
         }
 
-        // --- 7. CANDLE BLOW ---
+        // --- CANDLE ---
         function blowCandle() {
             const flame = document.getElementById('flame');
             const msg = document.getElementById('wish-message');
-            if(!flame.classList.contains('out')) {
-                flame.classList.add('out'); 
-                msg.innerText = "✨ May your wish reach the stars, Ashish! ✨";
+            if(flame.style.opacity !== '0') {
+                flame.style.opacity = '0'; 
+                msg.innerText = "✨ Wish sent to the stars! ✨";
                 msg.style.opacity = 1;
                 startConfetti(); 
             }
         }
         
-        // --- 8. CONFETTI (Optimized) ---
+        // --- CONFETTI ---
         function startConfetti() {
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
@@ -618,29 +816,87 @@
             const pieces = [];
             const colors = ['#e91e63', '#ffeb3b', '#00bcd4', '#8bc34a'];
             
-            for (let k = 0; k < 80; k++) { 
+            for (let k = 0; k < 60; k++) { 
                 pieces.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
                     color: colors[Math.floor(Math.random() * colors.length)],
                     size: Math.random() * 6 + 4,
-                    speed: Math.random() * 2 + 1, 
+                    speed: Math.random() * 3 + 2, 
                     wobble: Math.random() * 10
                 });
             }
             
             function animateConfetti() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let active = false;
                 pieces.forEach(p => {
+                    if (p.y < canvas.height) active = true;
                     ctx.fillStyle = p.color;
                     p.wobble += 0.05;
                     ctx.fillRect(p.x + Math.sin(p.wobble)*2, p.y, p.size, p.size);
                     p.y += p.speed;
-                    if (p.y > canvas.height) p.y = 0;
                 });
-                requestAnimationFrame(animateConfetti);
+                if (active) requestAnimationFrame(animateConfetti);
             }
             animateConfetti();
+        }
+
+        // --- GEMINI API ---
+        async function generateMagicWish() {
+            const apiKey = ""; 
+            const loader = document.getElementById('ai-loader');
+            const card = document.getElementById('ai-card');
+            const wishText = document.getElementById('ai-wish-text');
+            const button = document.querySelector('.magic-btn');
+
+            loader.style.display = 'block';
+            card.style.display = 'none';
+            button.disabled = true;
+            button.style.opacity = 0.6;
+
+            const prompt = "Write a very short, magical birthday wish for Sona. 2 sentences max. Mention stardust.";
+
+            try {
+                const response = await fetchWithRetry(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    }
+                );
+
+                const data = await response.json();
+                const generatedText = data.candidates[0].content.parts[0].text;
+
+                wishText.innerText = `"${generatedText}"`;
+                loader.style.display = 'none';
+                card.style.display = 'block';
+                startConfetti();
+
+            } catch (error) {
+                console.error("API Error:", error);
+                wishText.innerText = "The stars are aligning... please try again! ✨";
+                loader.style.display = 'none';
+                card.style.display = 'block';
+            } finally {
+                button.disabled = false;
+                button.style.opacity = 1;
+            }
+        }
+
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response;
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+                }
+            }
         }
 
         window.onload = function() {
